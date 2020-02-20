@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PendingComplaintsActivity"
+    android:id="@+id/cardview12"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll1">
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_manager"
+                        android:layout_marginRight="5dp">
+
+                    </ImageView>
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_genratorName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Responsibleman:"
+                        android:textStyle="bold"
+                        android:textColor="#363333"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_genratorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="Aditya Garg"
+                        android:layout_marginRight="70dp"
+                        android:textColor="#1A1717"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_machine"
+                        android:layout_marginRight="5dp"/>
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_machine_id1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Machine Id:"
+                        android:textStyle="bold"
+                        android:textColor="#363333"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_machine_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="59dp"
+                        android:text="111111111"
+                        android:textColor="#1A1717"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_complain"
+                        android:layout_marginRight="5dp"/>
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_Id1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Complain Id:"
+                        android:textStyle="bold"
+                        android:textColor="#363333"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_Id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="53dp"
+                        android:text="111111111"
+                        android:textColor="#1A1717"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_date_of_installation"
+                        android:layout_marginRight="5dp"/>
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_date1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date(Generated):"
+                        android:textStyle="bold"
+                        android:textColor="#363333"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/sm_pending_complaint_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="17dp"
+                        android:text="21/07/2020"
+                        android:textColor="#1A1717"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_profile"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/dropdown"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_expand_more"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_hide12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll1"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#A29F9F"
+
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_description"
+                    android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/sm_pending_complaint_description1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Description"
+                    android:textStyle="bold"
+                    android:textColor="#363333"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/sm_pending_complaint_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="I have completed my work for repairing computer.All thing are now working nice."
+                android:textColor="#4c4c4c"
+                android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#A29F9F"
+                android:layout_margin="5dp"
+                />
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/sm_chat_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:text="chat "
+                    android:layout_marginLeft="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/transparent_button_border"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#F50A5A"
+                    android:layout_marginRight="20dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:id="@+id/update_button"
+                    android:layout_marginLeft="10dp"
+                    android:text="UPDATE"
+                    android:textColor="#E01515"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/transparent_button_border"></Button>
+
+                <Button
+                    android:id="@+id/sm_status_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="status"
+                    android:textColor="#4F5EB4"
+                    android:background="@drawable/transparent_button_border"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
