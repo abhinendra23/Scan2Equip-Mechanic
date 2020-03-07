@@ -99,7 +99,7 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 Mechanic mechanic = dataSnapshot.getValue(Mechanic.class);
-                Picasso.get().load(mechanic.getImageURL()).into(profilePic);
+                //Picasso.get().load(mechanic.getImageURL()).into(profilePic);
                 name.setText(mechanic.getUserName());
                 email.setText(mechanic.getEmail());
 

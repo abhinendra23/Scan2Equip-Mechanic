@@ -55,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser()!=null)
-        {
-            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
-        }
+//        if(mAuth.getCurrentUser()!=null)
+//        {
+//            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+//        }
         customDialogBox = new CustomDialogBox(LoginActivity.this);
         customDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
