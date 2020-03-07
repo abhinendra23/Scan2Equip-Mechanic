@@ -1,7 +1,5 @@
 package com.example.mechanic;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mechanic.BottomNavigationActivity;
+import com.example.mechanic.R;
+import com.example.mechanic.RegisterActivity;
 import com.example.mechanic.model.CustomDialogBox;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,36 +35,43 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText loginEmail, loginPassword;
     Button loginButton;
+
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference serviceManReference;
-    CustomDialogBox customDialogBox;
 
+    CustomDialogBox customDialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
-        setContentView(R.layout.activity_login);
-
 
         mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+        }
         customDialogBox = new CustomDialogBox(LoginActivity.this);
         customDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        loginEmail = findViewById(R.id.loginEmail);
-        loginPassword = findViewById(R.id.loginPassword);
+//        loginEmail = findViewById(R.id.loginEmail);
+//        loginPassword = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        serviceManReference = firebaseDatabase.getReference("Users").child("ServiceMan");
+        serviceManReference = firebaseDatabase.getReference("Users").child("Mechanic");
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -73,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void login(String email, String password) {
 
@@ -96,13 +106,14 @@ public class LoginActivity extends AppCompatActivity {
                                     if(dataSnapshot.exists())
                                     {
                                         customDialogBox.dismiss();
-                                        startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
+                                        Intent i = new Intent(LoginActivity.this,BottomNavigationActivity.class);
+                                        startActivity(i);
                                         finish();
                                     }
                                     else
                                     {
                                         customDialogBox.dismiss();
-                                        startActivity(new Intent(getApplicationContext(),BottomNavigationActivity.class));
+                                        startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
                                         finish();
                                     }
                                 }
@@ -123,11 +134,10 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
     public void onLoginClick(View View){
-        startActivity(new Intent(this,RegisterActivity.class));
+        startActivity(new Intent(this, RegisterActivity.class));
         overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
         finish();
 
     }
-
 
 }

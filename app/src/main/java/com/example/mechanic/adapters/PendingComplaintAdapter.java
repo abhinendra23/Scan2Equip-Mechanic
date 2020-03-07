@@ -142,12 +142,12 @@ public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplai
                 @Override
                 public void onClick(View view) {
                     Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-                    Intent intent = new Intent(c, RMRequestStepIndicator.class);
-                    intent.putExtra("status", complaint.getStatus());
-                    intent.putExtra("generated date", complaint.getComplaintGeneratedDate());
-                    intent.putExtra("serviceman", complaint.getServicemanName());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    c.getApplicationContext().startActivity(intent);
+//                    Intent intent = new Intent(c, RMRequestStepIndicator.class);
+//                    intent.putExtra("status", complaint.getStatus());
+//                    intent.putExtra("generated date", complaint.getComplaintGeneratedDate());
+//                    intent.putExtra("serviceman", complaint.getServicemanName());
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    c.getApplicationContext().startActivity(intent);
                 }
             });
         }

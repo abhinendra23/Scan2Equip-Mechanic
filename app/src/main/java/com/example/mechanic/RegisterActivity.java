@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                             mechanic.setEmail(email);
                             mechanic.setUserName(userName);
 
-                            userReference.child("ServiceMan").child(user.getUid()).setValue(mechanic);
+                            userReference.child("Mechanic").child(user.getUid()).setValue(mechanic);
                             startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
                             finish();
                         }

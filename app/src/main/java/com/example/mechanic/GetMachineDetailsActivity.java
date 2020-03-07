@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.mechanic.model.Complaint;
-import com.example.mechanic.model.ComplaintDescriptionDialog;
 import com.example.mechanic.model.Machine;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -143,8 +142,8 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
                 complaint.setComplaintGeneratedDate(day+"/"+month+"/"+year);
                 complaint.setStatus(complaint.getGeneratedOnly());
 
-                ComplaintDescriptionDialog complaintDescriptionDialog = new ComplaintDescriptionDialog(GetMachineDetailsActivity.this,complaint,complaintIdValue);
-                complaintDescriptionDialog.show();
+              //  ComplaintDescriptionDialog complaintDescriptionDialog = new ComplaintDescriptionDialog(GetMachineDetailsActivity.this,complaint,complaintIdValue);
+              //  complaintDescriptionDialog.show();
 
             }
         });
