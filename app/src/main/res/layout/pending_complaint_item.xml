@@ -108,7 +108,7 @@
                         android:textColor="#363333"
                         android:textSize="15sp" />
                     <TextView
-                        android:id="@+id/sm_pending_complaint_Id"
+                        android:id="@+id/pending_complaint_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="53dp"

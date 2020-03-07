@@ -55,16 +55,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-//        if(mAuth.getCurrentUser()!=null)
-//        {
-//            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
-//        }
+        if(mAuth.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+        }
         customDialogBox = new CustomDialogBox(LoginActivity.this);
-        customDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-//        loginEmail = findViewById(R.id.loginEmail);
-//        loginPassword = findViewById(R.id.loginPassword);
+
         loginButton = findViewById(R.id.loginButton);
+        loginEmail = findViewById(R.id.loginEmail);
+        loginPassword = findViewById(R.id.loginPassword);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         serviceManReference = firebaseDatabase.getReference("Users").child("Mechanic");

@@ -51,7 +51,7 @@ public class ShowDetailsAdapter extends RecyclerView.Adapter<ShowDetailsAdapter.
         myholder.date.setText("19/01/2020");
         myholder.AgentId.setText(pastRecords.get(position).getServiceMan());
         myholder.Description.setText(pastRecords.get(position).getDescription());
-        myholder.CompliantId.setText(pastRecords.get(position).getComplaintId());
+        //myholder.CompliantId.setText(pastRecords.get(position).getComplaintId());
 
         boolean isExpanded = pastRecords.get(position).isExpanded();
         myholder.ll_hide.setVisibility(isExpanded ? View.VISIBLE : View.GONE);

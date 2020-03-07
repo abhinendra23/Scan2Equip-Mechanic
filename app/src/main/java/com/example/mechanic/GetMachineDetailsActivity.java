@@ -91,8 +91,8 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
                 serialNo.setText(machine.getSerialNumber());
                 department.setText(machine.getDepartment());
                 serviceTime.setText(machine.getServiceTime()+" months");
-                dateOfInstallation.setText(machine.getDate());
-                generator.setText(machine.getGeneratorName());
+                dateOfInstallation.setText(machine.getDateOfInstallation());
+                generator.setText(machine.getManager().getUserName());
             }
 
             @Override
@@ -129,18 +129,18 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                complaint = new Complaint();
-                complaint.setComplaintGenerator(user.getUid());
-                complaint.setComplaintMachineId(generationCode);
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                month = month+1;
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-
-                complaint.setComplaintGeneratedDate(day+"/"+month+"/"+year);
-                complaint.setStatus(complaint.getGeneratedOnly());
+//                complaint = new Complaint();
+//                complaint.setComplaintGenerator(user.getUid());
+//                complaint.setComplaintMachineId(generationCode);
+//                Calendar cal = Calendar.getInstance();
+//                int year = cal.get(Calendar.YEAR);
+//                int month = cal.get(Calendar.MONTH);
+//                month = month+1;
+//                int day = cal.get(Calendar.DAY_OF_MONTH);
+//
+//
+//                complaint.setComplaintGeneratedDate(day+"/"+month+"/"+year);
+//                complaint.setStatus(complaint.getGeneratedOnly());
 
               //  ComplaintDescriptionDialog complaintDescriptionDialog = new ComplaintDescriptionDialog(GetMachineDetailsActivity.this,complaint,complaintIdValue);
               //  complaintDescriptionDialog.show();

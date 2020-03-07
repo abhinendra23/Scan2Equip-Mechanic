@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.mechanic.model.IntroScreenItem;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -67,11 +68,11 @@ public class IntroActivity extends AppCompatActivity {
 
         // fill list screen
 
-        final List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("SCAN QR","By Scanning QR Code of a Machine You will Get to know about Past records of that Machine",R.drawable.scanimg4));
-        mList.add(new ScreenItem("GET DETAILS","Get All Data Of A Machine At Your Fingertips",R.drawable.getdetailsimg));
-        mList.add(new ScreenItem("COMPLAINTS","File Complain If Machine Is Not Working Properly",R.drawable.complainimg));
-        mList.add(new ScreenItem("REQUEST","FIle Request If You Want to Get any Service From Us",R.drawable.requestimg));
+        final List<IntroScreenItem> mList = new ArrayList<>();
+        mList.add(new IntroScreenItem("SCAN QR","By Scanning QR Code of a Machine You will Get to know about Past records of that Machine",R.drawable.scanimg4));
+        mList.add(new IntroScreenItem("GET DETAILS","Get All Data Of A Machine At Your Fingertips",R.drawable.getdetailsimg));
+        mList.add(new IntroScreenItem("COMPLAINTS","File Complain If Machine Is Not Working Properly",R.drawable.complainimg));
+        mList.add(new IntroScreenItem("REQUEST","FIle Request If You Want to Get any Service From Us",R.drawable.requestimg));
 
         // setup viewpager
         screenPager =findViewById(R.id.screen_viewpager);

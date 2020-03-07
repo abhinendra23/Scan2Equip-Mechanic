@@ -36,10 +36,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyHolder
     @Override
     public void onBindViewHolder(@NonNull MyHolder myholder1, int position) {
 
-        myholder1.pendingComplaintDate.setText(x.get(position).getComplaintGeneratedDate());
-        myholder1.pendingComplaintDescription.setText(x.get(position).getComplaintDescription());
-        myholder1.pendingComplaintId.setText(x.get(position).getComplaintId());
-        myholder1.pendingComplaintMachineId.setText(x.get(position).getComplaintMachineId());
+        myholder1.pendingComplaintDate.setText(x.get(position).getGeneratedDate());
+        myholder1.pendingComplaintDescription.setText(x.get(position).getDescription());
+        myholder1.pendingComplaintId.setText((int) x.get(position).getComplaintId());
+        myholder1.pendingComplaintMachineId.setText(x.get(position).getMachine().getMachineId());
 
     }
 

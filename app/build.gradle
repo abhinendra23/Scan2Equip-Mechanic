@@ -84,6 +84,12 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.8.0'
 
+    // paging dependency
+    implementation "androidx.paging:paging-runtime:2.1.1"
+
+    // firebase adapters
+    implementation 'com.firebaseui:firebase-ui-database:6.2.0'
+
 //
 
 

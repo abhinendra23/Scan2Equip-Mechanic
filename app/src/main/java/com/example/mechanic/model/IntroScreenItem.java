@@ -1,12 +1,12 @@
-package com.example.mechanic;
+package com.example.mechanic.model;
 
-public class ScreenItem {
+public class IntroScreenItem {
 
 
     String Title,Description;
     int ScreenImg;
 
-    public ScreenItem(String title, String description, int screenImg) {
+    public IntroScreenItem(String title, String description, int screenImg) {
         Title = title;
         Description = description;
         ScreenImg = screenImg;

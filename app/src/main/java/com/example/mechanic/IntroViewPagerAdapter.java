@@ -10,14 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.mechanic.model.IntroScreenItem;
+
 import java.util.List;
 
 public class IntroViewPagerAdapter extends PagerAdapter {
 
     Context mContext ;
-    List<ScreenItem> mListScreen;
+    List<IntroScreenItem> mListScreen;
 
-    public IntroViewPagerAdapter(Context mContext, List<ScreenItem> mListScreen) {
+    public IntroViewPagerAdapter(Context mContext, List<IntroScreenItem> mListScreen) {
         this.mContext = mContext;
         this.mListScreen = mListScreen;
     }

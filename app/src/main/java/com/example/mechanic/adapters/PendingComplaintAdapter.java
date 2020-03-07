@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -17,26 +18,29 @@ import com.example.mechanic.R;
 import com.example.mechanic.SMChatActivity;
 import com.example.mechanic.UpdateActivity;
 import com.example.mechanic.model.Complaint;
+import com.firebase.ui.database.paging.DatabasePagingOptions;
+import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
+import com.firebase.ui.database.paging.LoadingState;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.List;
 
-public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplaintAdapter.MyHolder> {
+public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Complaint,PendingComplaintAdapter.MyHolder> {
 
     Context c;
-    public List<Complaint> pendingComplaintList;
 
-    public PendingComplaintAdapter(Context c, List<Complaint> pendingComplaint) {
+    /**
+     * Construct a new FirestorePagingAdapter from the given {@link DatabasePagingOptions}.
+     *
+     * @param options
+     */
+    public PendingComplaintAdapter(@NonNull DatabasePagingOptions<Complaint> options,Context c) {
+        super(options);
+
         this.c = c;
-        this.pendingComplaintList = pendingComplaint;
     }
 
-    public PendingComplaintAdapter(Context c) {
-        this.c = c;
-    }
 
-    public void setPendingComplaintList(List<Complaint> pendingComplaintList) {
-        this.pendingComplaintList = pendingComplaintList;
-    }
 
     @NonNull
     @Override
@@ -46,24 +50,16 @@ public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplai
         return new PendingComplaintAdapter.MyHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull PendingComplaintAdapter.MyHolder myholder, int position) {
-
-        //myholder.pendingComplaintDate.setText(pendingComplaintList.get(position).getComplaintGeneratedDate());
-        myholder.pendingComplaintDescription.setText(pendingComplaintList.get(position).getComplaintDescription());
-        myholder.pendingComplaintGeneratorName.setText(pendingComplaintList.get(position).getGeneratorName());
-        myholder.pendingComplaintId.setText(pendingComplaintList.get(position).getComplaintId());
-        myholder.pendingComplaintMachineId.setText(pendingComplaintList.get(position).getComplaintMachineId());
-
-        boolean isExpanded = pendingComplaintList.get(position).isExpanded();
-        myholder.ll_hide.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+    protected void onBindViewHolder(@NonNull MyHolder viewHolder, int position, @NonNull Complaint model) {
+        viewHolder.bind(model);
     }
 
     @Override
-    public int getItemCount() {
-        return pendingComplaintList.size();
-    }
+    protected void onLoadingStateChanged(@NonNull LoadingState state) {
 
+    }
 
 
 
@@ -80,15 +76,13 @@ public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplai
             super(itemView);
 
             pendingComplaintDate = itemView.findViewById(R.id.sm_pending_complaint_date);
-            pendingComplaintId = itemView.findViewById(R.id.sm_pending_complaint_Id);
+            pendingComplaintId = itemView.findViewById(R.id.pending_complaint_id);
             pendingComplaintDescription = itemView.findViewById(R.id.sm_pending_complaint_description);
             pendingComplaintGeneratorName = itemView.findViewById(R.id.sm_pending_complaint_genratorName);
             updateButton = itemView.findViewById(R.id.update_button);
             pendingComplaintMachineId = itemView.findViewById((R.id.sm_pending_complaint_machine_id));
             chatButton = itemView.findViewById(R.id.sm_chat_button);
             statusButton = itemView.findViewById(R.id.sm_status_button);
-
-
 
             cardView = itemView.findViewById(R.id.cardview12);
             ll_hide = itemView.findViewById(R.id.ll_hide12);
@@ -101,9 +95,10 @@ public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplai
                 @Override
                 public void onClick(View v) {
 
-                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-                    complaint.setExpanded(!complaint.isExpanded());
-                    notifyItemChanged(getAdapterPosition());
+
+//                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
+////                    complaint.setExpanded(!complaint.isExpanded());
+//                    notifyItemChanged(getAdapterPosition());
 
 //
                 }
@@ -113,27 +108,32 @@ public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplai
                 @Override
                 public void onClick(View view) {
 
-                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-                    Intent i = new Intent(c, UpdateActivity.class);
-                    i.putExtra("generatorUid",complaint.getComplaintGenerator());
-                    i.putExtra("complaintId",complaint.getComplaintId());
-                    i.putExtra("generatorName",complaint.getGeneratorName());
-                    i.putExtra("servicemanName", complaint.getServicemanName());
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    c.getApplicationContext().startActivity(i);
+                    DataSnapshot dataSnapshot = getItem(getAdapterPosition());
+                    if (dataSnapshot != null) {
+                        Complaint complaint = dataSnapshot.getValue(Complaint.class);
+                        Toast.makeText(c, complaint.getMachine().getMachineId(), Toast.LENGTH_SHORT).show();
+                    }
+//                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
+//                    Intent i = new Intent(c, UpdateActivity.class);
+//                    i.putExtra("generatorUid",complaint.getManager().getUserName());
+//                    i.putExtra("complaintId",complaint.getComplaintId());
+//                    i.putExtra("generatorName",complaint.getManager().getUserName());
+//                    i.putExtra("servicemanName", complaint.getMechanic().getUserName());
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    c.getApplicationContext().startActivity(i);
                 }
             });
 
             chatButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-                    Intent intent = new Intent(c, SMChatActivity.class);
-                    intent.putExtra("userid", complaint.getComplaintGenerator());
-                    intent.putExtra("complaintId", complaint.getComplaintId());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    c.getApplicationContext().startActivity(intent);
+//                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
+//                    Intent intent = new Intent(c, SMChatActivity.class);
+//                    intent.putExtra("userid", complaint.getManager().getUserName());
+//                    intent.putExtra("complaintId", complaint.getComplaintId());
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    c.getApplicationContext().startActivity(intent);
 
                 }
             });
@@ -141,7 +141,7 @@ public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplai
             statusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
+                    //Complaint complaint = pendingComplaintList.get(getAdapterPosition());
 //                    Intent intent = new Intent(c, RMRequestStepIndicator.class);
 //                    intent.putExtra("status", complaint.getStatus());
 //                    intent.putExtra("generated date", complaint.getComplaintGeneratedDate());
@@ -150,6 +150,18 @@ public class PendingComplaintAdapter extends RecyclerView.Adapter<PendingComplai
 //                    c.getApplicationContext().startActivity(intent);
                 }
             });
+        }
+
+        public void bind(Complaint model)
+        {
+            pendingComplaintDescription.setText(model.getDescription());
+            pendingComplaintGeneratorName.setText(model.getManager().getUserName());
+            pendingComplaintId.setText(String.valueOf((int) model.getComplaintId()));
+            pendingComplaintMachineId.setText(model.getMachine().getMachineId());
+
+//        boolean isExpanded = pendingComplaintList.get(position).isExpanded();
+            boolean isExpanded = true;
+            ll_hide.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         }
 
     }
