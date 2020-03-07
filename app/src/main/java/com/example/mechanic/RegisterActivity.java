@@ -69,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Mechanic mechanic = new Mechanic();
                             mechanic.setEmail(email);
                             mechanic.setUserName(userName);
+                            mechanic.setUid(user.getUid());
 
                             userReference.child("Mechanic").child(user.getUid()).setValue(mechanic);
                             startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
