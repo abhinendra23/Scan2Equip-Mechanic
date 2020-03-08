@@ -2,6 +2,7 @@ package com.example.mechanic.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,19 +110,16 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
                 public void onClick(View view) {
 
                     DataSnapshot dataSnapshot = getItem(getAdapterPosition());
+                    Complaint complaint = null;
                     if (dataSnapshot != null) {
-                        Complaint complaint = dataSnapshot.getValue(Complaint.class);
+                        complaint = dataSnapshot.getValue(Complaint.class);
                         Toast.makeText(c, complaint.getMachine().getMachineId(), Toast.LENGTH_SHORT).show();
                     }
-//                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-//                    Intent i = new Intent(c, UpdateActivity.class);
-//                    i.putExtra("generatorUid",complaint.getManager().getUserName());
-//                    i.putExtra("complaintId",complaint.getComplaintId());
-//                    i.putExtra("generatorName",complaint.getManager().getUserName());
-//                    i.putExtra("servicemanName", complaint.getMechanic().getUserName());
-//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    c.getApplicationContext().startActivity(i);
+                    Intent i = new Intent(c, UpdateActivity.class);
+                    i.putExtra("complaint", Parcels.wrap(complaint))
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    c.getApplicationContext().startActivity(i);
                 }
             });
 
