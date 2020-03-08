@@ -29,7 +29,7 @@
         <activity android:name=".Requests" />
         <activity android:name=".PendingComplaintsActivity" />
         <activity android:name=".BottomNavigationActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".IntroActivity">
             <intent-filter>
