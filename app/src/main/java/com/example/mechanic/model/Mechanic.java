@@ -3,7 +3,6 @@ package com.example.mechanic.model;
 import org.parceler.Parcel;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Parcel
 public class Mechanic implements Cloneable{
@@ -13,7 +12,7 @@ public class Mechanic implements Cloneable{
     private float overallRating=0;
     private HashMap<String,Float> rating;
     private HashMap<String,Complaint> pendingComplaints, completedComplaints;
-    private HashMap<String,Request> pendingRequest, completedRequest;
+    private HashMap<String,Request> pendingRequests, completedRequests;
 
     public Object clone() throws
             CloneNotSupportedException
@@ -24,7 +23,7 @@ public class Mechanic implements Cloneable{
     public Mechanic() {
     }
 
-    public Mechanic(String userName, String email, String profilePicLink, int load, int numberOfRating, float overallRating, HashMap<String, Float> rating, HashMap<String, Complaint> pendingComplaints, HashMap<String, Complaint> completedComplaints, HashMap<String, Request> pendingRequest, HashMap<String, Request> completedRequest, String uid) {
+    public Mechanic(String userName, String email, String profilePicLink, int load, int numberOfRating, float overallRating, HashMap<String, Float> rating, HashMap<String, Complaint> pendingComplaints, HashMap<String, Complaint> completedComplaints, HashMap<String, Request> pendingRequests, HashMap<String, Request> completedRequests, String uid) {
         this.userName = userName;
         this.email = email;
         this.profilePicLink = profilePicLink;
@@ -34,8 +33,8 @@ public class Mechanic implements Cloneable{
         this.rating = rating;
         this.pendingComplaints = pendingComplaints;
         this.completedComplaints = completedComplaints;
-        this.pendingRequest = pendingRequest;
-        this.completedRequest = completedRequest;
+        this.pendingRequests = pendingRequests;
+        this.completedRequests = completedRequests;
         this.uid = uid;
     }
 
@@ -111,20 +110,20 @@ public class Mechanic implements Cloneable{
         this.completedComplaints = completedComplaints;
     }
 
-    public HashMap<String, Request> getPendingRequest() {
-        return pendingRequest;
+    public HashMap<String, Request> getPendingRequests() {
+        return pendingRequests;
     }
 
-    public void setPendingRequest(HashMap<String, Request> pendingRequest) {
-        this.pendingRequest = pendingRequest;
+    public void setPendingRequests(HashMap<String, Request> pendingRequests) {
+        this.pendingRequests = pendingRequests;
     }
 
-    public HashMap<String, Request> getCompletedRequest() {
-        return completedRequest;
+    public HashMap<String, Request> getCompletedRequests() {
+        return completedRequests;
     }
 
-    public void setCompletedRequest(HashMap<String, Request> completedRequest) {
-        this.completedRequest = completedRequest;
+    public void setCompletedRequests(HashMap<String, Request> completedRequests) {
+        this.completedRequests = completedRequests;
     }
 
     public String getUid() {

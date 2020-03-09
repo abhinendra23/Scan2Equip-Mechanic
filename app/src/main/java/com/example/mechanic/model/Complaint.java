@@ -23,7 +23,7 @@ public class Complaint implements Cloneable{
     private int status;
     private long complaintId;
     private float cost=0;
-    private HashMap<String,Request> pendingRequest;
+
 //    boolean isExpanded;
     private Chat chat;
 
@@ -35,7 +35,7 @@ public class Complaint implements Cloneable{
 
     public Complaint(){}
 
-    public Complaint(long complaintId, String description, String generatedDate, String completedDate, Machine machine, Manager manager, Mechanic mechanic, int status, float cost, HashMap<String, Request> pendingRequest, Chat chat) {
+    public Complaint(long complaintId, String description, String generatedDate, String completedDate, Machine machine, Manager manager, Mechanic mechanic, int status, float cost, Chat chat) {
         this.complaintId = complaintId;
         this.description = description;
         this.generatedDate = generatedDate;
@@ -45,7 +45,6 @@ public class Complaint implements Cloneable{
         this.mechanic = mechanic;
         this.status = status;
         this.cost = cost;
-        this.pendingRequest = pendingRequest;
         this.chat = chat;
     }
 
@@ -119,14 +118,6 @@ public class Complaint implements Cloneable{
 
     public void setCost(float cost) {
         this.cost = cost;
-    }
-
-    public HashMap<String, Request> getPendingRequest() {
-        return pendingRequest;
-    }
-
-    public void setPendingRequest(HashMap<String, Request> pendingRequest) {
-        this.pendingRequest = pendingRequest;
     }
 
     public Chat getChat() {

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Manager implements Cloneable{
 
     private String email, userName, profilePicLink, phoneNumber,savedAddress,uid;
-    private HashMap<String, Request> pendingApprovalRequest;
+    private HashMap<String, Request> pendingRequests;
     private HashMap<String,Complaint> pendingComplaints;
     private HashMap<String,Complaint> completedComplaints;
     private HashMap<String,Machine> myMachines;
@@ -23,13 +23,13 @@ public class Manager implements Cloneable{
     {
     }
 
-    public Manager(String email, String userName, String profilePicLink, String phoneNumber, String savedAddress, HashMap<String, Request> pendingApprovalRequest, HashMap<String, Complaint> pendingComplaints, HashMap<String, Complaint> completedComplaints, HashMap<String, Machine> myMachines, String uid) {
+    public Manager(String email, String userName, String profilePicLink, String phoneNumber, String savedAddress, HashMap<String, Request> pendingRequests, HashMap<String, Complaint> pendingComplaints, HashMap<String, Complaint> completedComplaints, HashMap<String, Machine> myMachines, String uid) {
         this.email = email;
         this.userName = userName;
         this.profilePicLink = profilePicLink;
         this.phoneNumber = phoneNumber;
         this.savedAddress = savedAddress;
-        this.pendingApprovalRequest = pendingApprovalRequest;
+        this.pendingRequests = pendingRequests;
         this.pendingComplaints = pendingComplaints;
         this.completedComplaints = completedComplaints;
         this.myMachines = myMachines;
@@ -76,12 +76,12 @@ public class Manager implements Cloneable{
         this.savedAddress = savedAddress;
     }
 
-    public HashMap<String, Request> getPendingApprovalRequest() {
-        return pendingApprovalRequest;
+    public HashMap<String, Request> getPendingRequests() {
+        return pendingRequests;
     }
 
-    public void setPendingApprovalRequest(HashMap<String, Request> pendingApprovalRequest) {
-        this.pendingApprovalRequest = pendingApprovalRequest;
+    public void setPendingRequests(HashMap<String, Request> pendingRequests) {
+        this.pendingRequests = pendingRequests;
     }
 
     public HashMap<String, Complaint> getPendingComplaints() {

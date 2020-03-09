@@ -43,7 +43,7 @@ public class RequestPendingAdapter extends  RecyclerView.Adapter<RequestPendingA
         myholder1.responsiblemanName.setText(x.get(position).getComplaint().getManager().getUserName());
         myholder1.description.setText(x.get(position).getDescription());
         myholder1.complain_id.setText((int) x.get(position).getComplaint().getComplaintId());
-        myholder1.request_id.setText(x.get(position).getRequestId());
+        myholder1.request_id.setText(String.valueOf((int) x.get(position).getRequestId()));
 
         Log.i("asdf","fgh");
 

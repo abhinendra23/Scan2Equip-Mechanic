@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.mechanic.model.Complaint;
 import com.example.mechanic.model.Request;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 
@@ -50,26 +52,15 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
 
-        Submit_Description = (EditText) findViewById(R.id.Submit_Description);
-        radio_group = (RadioGroup) findViewById(R.id.radio_group);
-        submit_update = (Button) findViewById(R.id.submit_update);
-
-//        generatorUid = getIntent().getStringExtra("generatorUid");
-//        complaintId = getIntent().getStringExtra("complaintId");
-//        responsibleName = getIntent().getStringExtra("generatorName");
-//        servicemanName = getIntent().getStringExtra("servicemanName");
-
-        Complaint complaint = Parcels.unwrap(getIntent().getParcelableExtra("complaint"));
+        Submit_Description = findViewById(R.id.Submit_Description);
+        radio_group = findViewById(R.id.radio_group);
+        submit_update = findViewById(R.id.submit_update);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         requestIdReference = firebaseDatabase.getReference("RequestId");
-        requestReference = firebaseDatabase.getReference("Requests");
-        MechanicReference = firebaseDatabase.getReference("Users").child("Mechanic").child(user.getUid());
-        ManagerReference = firebaseDatabase.getReference("Users").child("Manager").child(complaint.getManager().getUid());
-
 
         requestIdReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,41 +79,71 @@ public class UpdateActivity extends AppCompatActivity {
         submit_update.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                Complaint complaint = Parcels.unwrap(getIntent().getParcelableExtra("complaint"));
+                if (complaint == null) {
+                    Toast.makeText(UpdateActivity.this, "NUll", Toast.LENGTH_SHORT).show();
+                    Log.i("sudhanshu", "null");
+                }
                 int selectedId = radio_group.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
                 status = radioButton.getText().toString();
 
+                HashMap<String, Object> hashMap = new HashMap<>();
+
                 Request request = new Request();
-//                request.setServiceMan(user.getUid());
-//                request.setDescription(Submit_Description.getText().toString());
-//                Log.i("status", status);
-//                if(status.equals("Pending"))
-//                    request.setStatus(false);
-//                else if(status.equals("Completed"))
-//                    request.setStatus(true);
-//                request.setResponsible(generatorUid);
-//                request.setComplaintId(complaintId);
-//                request.setRequestid(requestIdValue);
-//                request.setResponsiblemanName(responsibleName);
-//                request.setServicemanName(servicemanName);
 
-//                MechanicReference.child("pendingRequests").push().setValue(requestIdValue);
-//                ManagerReference.child("pendingRequests").push().setValue(requestIdValue);
+                request.setDescription(Submit_Description.getText().toString());
 
-                HashMap<String,Object> updateDatabaseValue = new HashMap<>();
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                month = month + 1;
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                request.setGeneratedDate(day + "/" + month + "/" + year);
 
-//                updateDatabaseValue.put("/Users/ServiceMan/"+user.getUid()+"/pendingRequestList/"+requestIdValue,"true");
-//                updateDatabaseValue.put("/Users/ResponsibleMan/"+generatorUid+ "/pendingRequestList/"+requestIdValue,"true");
-//                updateDatabaseValue.put("/Requests/"+requestIdValue,request);
-//                updateDatabaseValue.put("/RequestId",String.valueOf(Integer.parseInt(requestIdValue)+1));
-//                updateDatabaseValue.put("/Complaints/"+complaintId+"/status",3);
+                request.setRequestId(requestIdValue);
 
-                FirebaseDatabase.getInstance().getReference().updateChildren(updateDatabaseValue);
+                if (status.equals("Pending"))
+                    request.setStatus(false);
+                else if (status.equals("Completed"))
+                    request.setStatus(true);
 
-//                requestReference.child(requestIdValue).setValue(request);
-//                requestIdReference.setValue(String.valueOf(Integer.parseInt(requestIdValue)+1));
+                Complaint tempComplaint = null;
+                Request tempRequest = null;
+                try {
+                    tempComplaint = (Complaint) complaint.clone();
+                    tempRequest = (Request) request.clone();
+                    request.setComplaint(complaint);
 
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
 
+                if (tempComplaint != null && tempRequest!=null) {
+
+                    tempRequest.setComplaint(tempComplaint);
+                    hashMap.put("/Requests/" + requestIdValue, tempRequest);
+                    hashMap.put("/Users/Mechanic/" + user.getUid() + "/pendingRequests/" + requestIdValue, tempRequest);
+
+                }
+
+                String managerUid = complaint.getManager().getUid();
+                tempRequest = null;
+                try {
+                    tempRequest = (Request) request.clone();
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+                if (tempRequest != null) {
+                    tempRequest.getComplaint().setManager(null);
+                }
+                hashMap.put("/Users/Manager/" + managerUid + "/pendingRequests/" + tempRequest.getRequestId(), tempRequest);
+                hashMap.put("/Users/Manager/" + managerUid + "/pendingComplaints/" + complaint.getComplaintId() + "/status", 3);
+                hashMap.put("/Complaints/" + complaint.getComplaintId() + "/status", 3);
+                hashMap.put("/RequestId", requestIdValue + 1);
+
+                FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
 
             }
         });

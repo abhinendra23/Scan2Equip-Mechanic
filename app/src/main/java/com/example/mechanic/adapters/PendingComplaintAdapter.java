@@ -115,13 +115,14 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
                     Complaint complaint = null;
                     if (dataSnapshot != null) {
                         complaint = dataSnapshot.getValue(Complaint.class);
-                        Toast.makeText(c, complaint.getMachine().getMachineId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(c, complaint.getManager().getUid(), Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(c, UpdateActivity.class);
+                        i.putExtra("complaint", Parcels.wrap(complaint));
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        c.getApplicationContext().startActivity(i);
                     }
 
-                    Intent i = new Intent(c, UpdateActivity.class);
-                    i.putExtra("complaint", Parcels.wrap(complaint));
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    c.getApplicationContext().startActivity(i);
+
                 }
             });
 
