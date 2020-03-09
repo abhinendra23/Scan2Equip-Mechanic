@@ -2,6 +2,7 @@ package com.example.mechanic.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,12 +128,17 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
             chatButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-//                    Intent intent = new Intent(c, SMChatActivity.class);
-//                    intent.putExtra("userid", complaint.getManager().getUserName());
-//                    intent.putExtra("complaintId", complaint.getComplaintId());
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    c.getApplicationContext().startActivity(intent);
+
+                    DataSnapshot dataSnapshot = getItem(getAdapterPosition());
+                    Complaint complaint = null;
+                    if (dataSnapshot != null) {
+                        complaint = dataSnapshot.getValue(Complaint.class);
+                    }
+                    Intent intent = new Intent(c, SMChatActivity.class);
+                    intent.putExtra("userid", complaint.getManager().getUid());
+                    intent.putExtra("complaintId", String.valueOf(complaint.getComplaintId()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    c.getApplicationContext().startActivity(intent);
 
                 }
             });

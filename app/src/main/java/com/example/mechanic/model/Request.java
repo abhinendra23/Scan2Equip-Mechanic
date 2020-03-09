@@ -4,7 +4,8 @@ public class Request implements Cloneable{
 
     private Complaint complaint;
     private String description, generatedDate, approvedDate;
-    private int requestId, availabilityOfParts;
+    private int availabilityOfParts;
+    private long requestId;
     private float cost;
 
     public Object clone() throws
@@ -16,7 +17,7 @@ public class Request implements Cloneable{
     public Request() {
     }
 
-    public Request(Complaint complaint, String description, String generatedDate, String approvedDate, int requestId, int availabilityOfParts, float cost) {
+    public Request(Complaint complaint, String description, String generatedDate, String approvedDate, long requestId, int availabilityOfParts, float cost) {
         this.complaint = complaint;
         this.description = description;
         this.generatedDate = generatedDate;
@@ -58,7 +59,7 @@ public class Request implements Cloneable{
         this.approvedDate = approvedDate;
     }
 
-    public int getRequestId() {
+    public long getRequestId() {
         return requestId;
     }
 
