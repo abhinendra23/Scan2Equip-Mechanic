@@ -20,41 +20,49 @@ import com.firebase.ui.database.paging.LoadingState;
 
 import java.util.List;
 
-
-public class RequestPendingAdapter extends FirebaseRecyclerPagingAdapter<Request, RequestPendingAdapter.MyHolder> {
+public class RequestPendingAdapter extends FirebaseRecyclerPagingAdapter<Request,RequestPendingAdapter.MyHolder> {
 
     Context c;
+    List<Request> x ;      //Define your list here    - Aditya
+
     /**
      * Construct a new FirestorePagingAdapter from the given {@link DatabasePagingOptions}.
      *
      * @param options
      */
-    public RequestPendingAdapter(DatabasePagingOptions<Request> options, Context c) {
+    public RequestPendingAdapter(@NonNull DatabasePagingOptions<Request> options,Context c) {
         super(options);
-        this.c = c;
-
+        this.c  = c;
     }
 
-    public RequestPendingAdapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+    @NonNull
+    @Override
+    public RequestPendingAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pending_request_item,null);
         return new RequestPendingAdapter.MyHolder(view);
     }
 
-    protected void onBindViewHolder(RequestPendingAdapter.MyHolder viewHolder, int position, Request model) {
+    @Override
+    protected void onBindViewHolder(@NonNull MyHolder viewHolder, int position, @NonNull Request model) {
+
         viewHolder.bind(model);
     }
-    protected void onLoadingStateChanged(LoadingState state){
+
+    @Override
+    protected void onLoadingStateChanged(@NonNull LoadingState state) {
 
     }
 
-    class MyHolder extends RecyclerView.ViewHolder
-    {
+    class MyHolder extends RecyclerView.ViewHolder{
+
+
         TextView request_id , responsiblemanName ,  description , complain_id ;
         CardView cardview;
         LinearLayout ll_hide;
 
-        public MyHolder(final View itemView)
-        {
+        public MyHolder(@NonNull View itemView) {
             super(itemView);
 
             request_id = itemView.findViewById(R.id.s_RecyclerView_requestID__pen_req);
@@ -63,7 +71,7 @@ public class RequestPendingAdapter extends FirebaseRecyclerPagingAdapter<Request
             complain_id = itemView.findViewById(R.id.s_RecyclerView_ComplainID_pen_req);
             cardview = itemView.findViewById(R.id.s_cardview_pen_req);
             ll_hide=  itemView.findViewById(R.id.s_ll_hide_pen_req);
-            ll_hide.setVisibility(View.INVISIBLE);
+            ll_hide.setVisibility(View.GONE);
 
             cardview.setOnClickListener(new View.OnClickListener() {                //Expandable card feature
                 @Override
@@ -78,19 +86,17 @@ public class RequestPendingAdapter extends FirebaseRecyclerPagingAdapter<Request
 
         }
 
-        public void bind(Request model) {
+        public void bind(Request model)
+        {
             responsiblemanName.setText(model.getComplaint().getManager().getUserName());
             description.setText(model.getDescription());
-            complain_id.setText(String.valueOf(model.getComplaint().getComplaintId()));
-            request_id.setText(String.valueOf(model.getRequestId()));
+            complain_id.setText(String.valueOf((int) model.getComplaint().getComplaintId()));
+            request_id.setText(String.valueOf((int) model.getRequestId()));
 
             Log.i("asdf","fgh");
 
-    //        boolean isExpanded = x.get(position).isExpanded();
-            boolean isExpanded = true;
-            ll_hide.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+//        boolean isExpanded = x.get(position).isExpanded();
         }
-
-
     }
+
 }
