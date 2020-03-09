@@ -1,5 +1,8 @@
 package com.example.mechanic.model;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Request implements Cloneable{
 
     private Complaint complaint;

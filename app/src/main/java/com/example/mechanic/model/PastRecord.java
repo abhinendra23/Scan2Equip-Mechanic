@@ -1,5 +1,6 @@
 package com.example.mechanic.model;
 
+
 public class PastRecord {
 
     String serviceDate;

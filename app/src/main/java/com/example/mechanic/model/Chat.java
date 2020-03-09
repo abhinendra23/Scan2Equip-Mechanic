@@ -1,5 +1,8 @@
 package com.example.mechanic.model;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Chat {
 
     public String sender;

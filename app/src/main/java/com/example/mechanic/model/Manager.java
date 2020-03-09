@@ -1,7 +1,10 @@
 package com.example.mechanic.model;
 
+import org.parceler.Parcel;
+
 import java.util.HashMap;
 
+@Parcel
 public class Manager implements Cloneable{
 
     private String email, userName, profilePicLink, phoneNumber,savedAddress,uid;

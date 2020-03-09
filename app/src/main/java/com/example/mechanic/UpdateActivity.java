@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.parceler.Parcels;
+
 import java.util.HashMap;
 
 
@@ -109,11 +111,11 @@ public class UpdateActivity extends AppCompatActivity {
 
                 HashMap<String,Object> updateDatabaseValue = new HashMap<>();
 
-                updateDatabaseValue.put("/Users/ServiceMan/"+user.getUid()+"/pendingRequestList/"+requestIdValue,"true");
-                updateDatabaseValue.put("/Users/ResponsibleMan/"+generatorUid+ "/pendingRequestList/"+requestIdValue,"true");
-                updateDatabaseValue.put("/Requests/"+requestIdValue,request);
-                updateDatabaseValue.put("/RequestId",String.valueOf(Integer.parseInt(requestIdValue)+1));
-                updateDatabaseValue.put("/Complaints/"+complaintId+"/status",3);
+//                updateDatabaseValue.put("/Users/ServiceMan/"+user.getUid()+"/pendingRequestList/"+requestIdValue,"true");
+//                updateDatabaseValue.put("/Users/ResponsibleMan/"+generatorUid+ "/pendingRequestList/"+requestIdValue,"true");
+//                updateDatabaseValue.put("/Requests/"+requestIdValue,request);
+//                updateDatabaseValue.put("/RequestId",String.valueOf(Integer.parseInt(requestIdValue)+1));
+//                updateDatabaseValue.put("/Complaints/"+complaintId+"/status",3);
 
                 FirebaseDatabase.getInstance().getReference().updateChildren(updateDatabaseValue);
 

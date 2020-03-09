@@ -1,8 +1,11 @@
 package com.example.mechanic.model;
 
+import org.parceler.Parcel;
+
 import java.util.HashMap;
 import java.util.List;
 
+@Parcel
 public class Mechanic implements Cloneable{
 
     private String userName, email, profilePicLink, uid;
