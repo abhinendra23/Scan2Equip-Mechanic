@@ -1,8 +1,13 @@
 package com.example.mechanic.model;
 
+import androidx.versionedparcelable.ParcelField;
+
+import org.parceler.Parcel;
+
 import java.util.Date;
 import java.util.HashMap;
 
+@Parcel
 public class Complaint implements Cloneable{
 
     public static int generatedOnly = 1;

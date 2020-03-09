@@ -23,6 +23,8 @@ import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
 import com.firebase.ui.database.paging.LoadingState;
 import com.google.firebase.database.DataSnapshot;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Complaint,PendingComplaintAdapter.MyHolder> {
@@ -109,19 +111,16 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
                 public void onClick(View view) {
 
                     DataSnapshot dataSnapshot = getItem(getAdapterPosition());
+                    Complaint complaint = null;
                     if (dataSnapshot != null) {
-                        Complaint complaint = dataSnapshot.getValue(Complaint.class);
+                        complaint = dataSnapshot.getValue(Complaint.class);
                         Toast.makeText(c, complaint.getMachine().getMachineId(), Toast.LENGTH_SHORT).show();
                     }
-//                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-//                    Intent i = new Intent(c, UpdateActivity.class);
-//                    i.putExtra("generatorUid",complaint.getManager().getUserName());
-//                    i.putExtra("complaintId",complaint.getComplaintId());
-//                    i.putExtra("generatorName",complaint.getManager().getUserName());
-//                    i.putExtra("servicemanName", complaint.getMechanic().getUserName());
-//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    c.getApplicationContext().startActivity(i);
+
+                    Intent i = new Intent(c, UpdateActivity.class);
+                    i.putExtra("complaint", Parcels.wrap(complaint));
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    c.getApplicationContext().startActivity(i);
                 }
             });
 
@@ -141,7 +140,15 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
             statusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Complaint complaint = pendingComplaintList.get(getAdapterPosition());
+
+//                    DataSnapshot dataSnapshot = getItem(getAdapterPosition());
+//                    if (dataSnapshot != null) {
+//                        Complaint complaint = dataSnapshot.getValue(Complaint.class);
+//
+//                    }
+//
+//
+//
 //                    Intent intent = new Intent(c, RMRequestStepIndicator.class);
 //                    intent.putExtra("status", complaint.getStatus());
 //                    intent.putExtra("generated date", complaint.getComplaintGeneratedDate());
