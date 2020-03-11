@@ -106,10 +106,11 @@ public class UpdateActivity extends AppCompatActivity {
                 else if (status.equals("Completed"))
                     request.setStatus(true);
 
-                Complaint tempComplaint = null;
+                Complaint tempComplaint1 = null,tempComplaint2=null;
                 Request tempRequest = null;
                 try {
-                    tempComplaint = (Complaint) complaint.clone();
+                    tempComplaint1 = (Complaint) complaint.clone();
+                    tempComplaint2 = (Complaint) complaint.clone();
                     tempRequest = (Request) request.clone();
                     request.setComplaint(complaint);
 
@@ -117,9 +118,9 @@ public class UpdateActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if (tempComplaint != null && tempRequest!=null) {
+                if (tempComplaint1 != null && tempRequest!=null) {
 
-                    tempRequest.setComplaint(tempComplaint);
+                    tempRequest.setComplaint(tempComplaint1);
                     hashMap.put("/Requests/" + requestIdValue, tempRequest);
                 }
 
@@ -135,11 +136,13 @@ public class UpdateActivity extends AppCompatActivity {
                 {
                     tempRequest.getComplaint().setMechanic(null);
                     hashMap.put("/Users/Mechanic/" + user.getUid() + "/pendingRequests/" + requestIdValue, tempRequest);
+                    Log.i("sudhanshu",tempRequest.getComplaint().getManager().getEmail());
                 }
 
 
 
                 String managerUid = complaint.getManager().getUid();
+                request.setComplaint(tempComplaint2);
                 tempRequest = null;
                 try {
                     tempRequest = (Request) request.clone();
