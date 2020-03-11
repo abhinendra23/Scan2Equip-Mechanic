@@ -81,10 +81,7 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Complaint complaint = Parcels.unwrap(getIntent().getParcelableExtra("complaint"));
-                if (complaint == null) {
-                    Toast.makeText(UpdateActivity.this, "NUll", Toast.LENGTH_SHORT).show();
-                    Log.i("sudhanshu", "null");
-                }
+
                 int selectedId = radio_group.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
                 status = radioButton.getText().toString();
