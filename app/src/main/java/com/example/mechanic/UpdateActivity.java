@@ -121,9 +121,23 @@ public class UpdateActivity extends AppCompatActivity {
 
                     tempRequest.setComplaint(tempComplaint);
                     hashMap.put("/Requests/" + requestIdValue, tempRequest);
-                    hashMap.put("/Users/Mechanic/" + user.getUid() + "/pendingRequests/" + requestIdValue, tempRequest);
-
                 }
+
+
+                tempRequest = null;
+                try {
+                    tempRequest = (Request) request.clone();
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+
+                if(tempRequest != null)
+                {
+                    tempRequest.getComplaint().setMechanic(null);
+                    hashMap.put("/Users/Mechanic/" + user.getUid() + "/pendingRequests/" + requestIdValue, tempRequest);
+                }
+
+
 
                 String managerUid = complaint.getManager().getUid();
                 tempRequest = null;
