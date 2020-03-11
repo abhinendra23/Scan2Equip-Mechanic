@@ -23,6 +23,10 @@ import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
 import com.firebase.ui.database.paging.LoadingState;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
@@ -115,12 +119,37 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
                     Complaint complaint = null;
                     if (dataSnapshot != null) {
                         complaint = dataSnapshot.getValue(Complaint.class);
-                        Toast.makeText(c, complaint.getManager().getUid(), Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(c, UpdateActivity.class);
-                        i.putExtra("complaint", Parcels.wrap(complaint));
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        c.getApplicationContext().startActivity(i);
+//                        Toast.makeText(c, complaint.getManager().getUid(), Toast.LENGTH_SHORT).show();
+//                        Intent i = new Intent(c, UpdateActivity.class);
+//                        i.putExtra("complaint", Parcels.wrap(complaint));
+//                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        c.getApplicationContext().startActivity(i);
                     }
+
+                    FirebaseDatabase firebaseDatabase;
+                    DatabaseReference complaintReference;
+
+                    firebaseDatabase = FirebaseDatabase.getInstance();
+                    complaintReference = firebaseDatabase.getReference("Complaints").child(String.valueOf(complaint.getComplaintId()));
+
+                    complaintReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Complaint complaint1 = dataSnapshot.getValue(Complaint.class);
+                            Toast.makeText(c, complaint1.getManager().getUid(), Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(c, UpdateActivity.class);
+                            i.putExtra("complaint", Parcels.wrap(complaint1));
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            c.getApplicationContext().startActivity(i);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
 
 
                 }
