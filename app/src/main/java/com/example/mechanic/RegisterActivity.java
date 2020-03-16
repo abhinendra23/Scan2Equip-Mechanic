@@ -13,14 +13,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mechanic.model.Manager;
 import com.example.mechanic.model.Mechanic;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -33,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference userReference;
+
+    FirebaseFunctions firebaseFunctions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseFunctions = FirebaseFunctions.getInstance();
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,28 +70,50 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful())
-                        {
-                            user = auth.getCurrentUser();
-                            userReference = firebaseDatabase.getReference("Users");
+                    if(task.isSuccessful())
+                    {
+                        user = auth.getCurrentUser();
+                        userReference = firebaseDatabase.getReference("Users");
 
-                            Mechanic mechanic = new Mechanic();
-                            mechanic.setEmail(email);
-                            mechanic.setUserName(userName);
-                            mechanic.setUid(user.getUid());
+                        HashMap<String,String> data = new HashMap<>();
 
-                            userReference.child("Mechanic").child(user.getUid()).setValue(mechanic);
-                            startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
-                            finish();
-                        }
-                        else
-                        {
-                            Toast.makeText(RegisterActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
-                        }
+                        data.put("claim","mechanic");
+                        data.put("email",user.getEmail());
+
+                        firebaseFunctions.getHttpsCallable("setCustomClaim")
+                            .call(data)
+                            .addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
+                                @Override
+                                public void onSuccess(HttpsCallableResult httpsCallableResult) {
+
+                                    user = auth.getCurrentUser();
+                                    HashMap<String,String> hashMap = (HashMap<String, String>) httpsCallableResult.getData();
+                                    if(hashMap.get("status").equals("Successful"))
+                                    {
+                                        Mechanic mechanic = new Mechanic();
+                                        mechanic.setEmail(email);
+                                        mechanic.setUserName(userName);
+                                        mechanic.setUid(user.getUid());
+
+                                        userReference.child("Mechanic").child(user.getUid()).setValue(mechanic);
+                                        startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
+                                        finish();
+                                    }
+                                    else
+                                    {
+                                        user.delete();
+                                        Toast.makeText(RegisterActivity.this, "Some Error Occured \n Please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
 
                     }
+                    else
+                    {
+                        Toast.makeText(RegisterActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
+                    }
+                    }
                 });
-
 
             }
         });

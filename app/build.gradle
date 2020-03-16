@@ -93,6 +93,9 @@ dependencies {
     // firebase adapters
     implementation 'com.firebaseui:firebase-ui-database:6.2.0'
 
+    // firebase functions
+    implementation 'com.google.firebase:firebase-functions:19.0.2'
+
 
 //
 

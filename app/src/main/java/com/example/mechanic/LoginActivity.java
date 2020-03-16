@@ -21,10 +21,12 @@ import com.example.mechanic.R;
 import com.example.mechanic.RegisterActivity;
 import com.example.mechanic.model.CustomDialogBox;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,10 +57,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser()!=null)
-        {
-            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
-        }
+//        if(mAuth.getCurrentUser()!=null)
+//        {
+//            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+//        }
         customDialogBox = new CustomDialogBox(LoginActivity.this);
 
 
@@ -100,30 +102,33 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseDatabase.getInstance().getReference("tokens/" +
                                     mAuth.getCurrentUser().getUid()).setValue(token);
 
-                            serviceManReference.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.exists())
-                                    {
-                                        customDialogBox.dismiss();
-                                        Intent i = new Intent(LoginActivity.this,BottomNavigationActivity.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                    else
-                                    {
-                                        customDialogBox.dismiss();
-                                        startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
-                                        finish();
-                                    }
-                                }
+                            FirebaseUser user = mAuth.getCurrentUser();
 
+                            user.getIdToken(true).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
                                 @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                public void onSuccess(GetTokenResult getTokenResult) {
+                                    try {
+                                        boolean isManager = (boolean) getTokenResult.getClaims().get("mechanic");
+                                        if(isManager)
+                                        {
+                                            customDialogBox.dismiss();
+                                            Intent i = new Intent(LoginActivity.this,BottomNavigationActivity.class);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            customDialogBox.dismiss();
+                                            Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Toast.makeText(LoginActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
+                                    }
 
                                 }
                             });
-
 
                         } else {
                             customDialogBox.dismiss();
