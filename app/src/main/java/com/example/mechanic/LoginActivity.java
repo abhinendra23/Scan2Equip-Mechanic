@@ -124,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                     catch (Exception e)
                                     {
+                                        customDialogBox.dismiss();
                                         Toast.makeText(LoginActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
                                     }
 
