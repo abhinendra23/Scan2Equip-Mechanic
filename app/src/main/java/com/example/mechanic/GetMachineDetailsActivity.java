@@ -73,10 +73,10 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        machineReference = firebaseDatabase.getReference("machines").child(generationCode);
-        complaintIdReference = firebaseDatabase.getReference("complaintId");
-        serviceManListReference = firebaseDatabase.getReference("Users").child("ServiceMan");
-        responsibleReference = firebaseDatabase.getReference("Users").child("ResponsibleMan").child(user.getUid());
+        machineReference = firebaseDatabase.getReference("Machines").child(generationCode);
+        complaintIdReference = firebaseDatabase.getReference("ComplaintId");
+        serviceManListReference = firebaseDatabase.getReference("Users").child("Mechanic");
+        //responsibleReference = firebaseDatabase.getReference("Users").child("Manager").child(user.getUid());
         complaintReference = firebaseDatabase.getReference("Complaints");
 
         QRCodeImage = findViewById(R.id.QrCodeImage);
@@ -120,7 +120,6 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 

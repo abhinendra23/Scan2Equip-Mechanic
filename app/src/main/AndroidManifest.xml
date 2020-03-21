@@ -25,7 +25,7 @@
         <activity android:name=".GetMachineDetailsActivity" />
         <activity android:name=".SMChatActivity" />
         <activity android:name=".UpdateActivity" />
-        <activity android:name=".ScanQRActivity" />
+        <activity android:name=".ScanQRActivity"/>
         <activity android:name=".Requests" />
         <activity android:name=".PendingComplaintsActivity" />
         <activity android:name=".BottomNavigationActivity" />
