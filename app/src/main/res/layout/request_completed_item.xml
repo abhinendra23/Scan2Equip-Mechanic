@@ -156,7 +156,7 @@
 
 
         <LinearLayout
-            android:id="@+id/s_ll_hide_pen_req"
+            android:id="@+id/s_ll_hide_com_req"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/s_ll1__com_req"

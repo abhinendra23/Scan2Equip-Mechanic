@@ -5,23 +5,34 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mechanic.R;
 import com.example.mechanic.model.Request;
+import com.firebase.ui.database.paging.DatabasePagingOptions;
+import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
+import com.firebase.ui.database.paging.LoadingState;
 
 import java.util.List;
 
-public class RequestCompletedAdapter extends RecyclerView.Adapter<RequestCompletedAdapter.MyHolder> {
+public class RequestCompletedAdapter extends FirebaseRecyclerPagingAdapter<Request, RequestCompletedAdapter.MyHolder> {
 
     Context c;
-    List<Request> completedRequest;
 
-    public RequestCompletedAdapter(Context c, List<Request> completedRequest) {
+    /**
+     * Construct a new FirestorePagingAdapter from the given {@link DatabasePagingOptions}.
+     *
+     * @param options
+     */
+
+    public RequestCompletedAdapter(DatabasePagingOptions<Request> options, Context c) {
+        super(options);
         this.c = c;
-        this.completedRequest = completedRequest;
     }
 
     @NonNull
@@ -32,23 +43,59 @@ public class RequestCompletedAdapter extends RecyclerView.Adapter<RequestComplet
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RequestCompletedAdapter.MyHolder holder, int position) {
+    protected void onBindViewHolder(@NonNull RequestCompletedAdapter.MyHolder holder, int position, Request model) {
 
-
+        holder.bind(model);
 
     }
 
     @Override
-    public int getItemCount() {
-        Log.i("RequestSize",String.valueOf(completedRequest.size()));
-        return completedRequest.size();
+    protected void onLoadingStateChanged(@NonNull LoadingState state) {
 
     }
 
+
+
     public class MyHolder extends RecyclerView.ViewHolder{
+
+        TextView request_id , responsiblemanName ,  description , complain_id, approvedDate ;
+        CardView cardview;
+        LinearLayout ll_hide;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
+
+            request_id = itemView.findViewById(R.id.s_RecyclerView_requestID__com_req);
+            responsiblemanName = itemView.findViewById(R.id.s_RecyclerView_ResponsibleMan_com_req);
+            description = itemView.findViewById(R.id.s_RecyclerView_Description_com_req);
+            complain_id = itemView.findViewById(R.id.s_RecyclerView_ComplainID_com_req);
+            approvedDate = itemView.findViewById(R.id.RecyclerView_Date);
+            cardview = itemView.findViewById(R.id.s_cardview_com_req);
+            ll_hide=  itemView.findViewById(R.id.s_ll_hide_com_req);
+            ll_hide.setVisibility(View.GONE);
+
+            cardview.setOnClickListener(new View.OnClickListener() {                //Expandable card feature
+                @Override
+                public void onClick(View v) {
+
+                    if(ll_hide.getVisibility()==View.GONE)
+                        ll_hide.setVisibility(View.VISIBLE);
+                    else
+                        ll_hide.setVisibility(View.GONE);
+                }
+            });
+
+        }
+
+        public void bind(Request model)
+        {
+            responsiblemanName.setText(model.getComplaint().getManager().getUserName());
+            description.setText(model.getDescription());
+            complain_id.setText(String.valueOf((int) model.getComplaint().getComplaintId()));
+            request_id.setText(String.valueOf((int) model.getRequestId()));
+            approvedDate.setText(model.getApprovedDate());
+
+//        boolean isExpanded = x.get(position).isExpanded();
         }
     }
 
