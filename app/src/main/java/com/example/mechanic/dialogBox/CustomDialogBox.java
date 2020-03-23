@@ -1,4 +1,4 @@
-package com.example.mechanic.model;
+package com.example.mechanic.dialogBox;
 
 import android.app.Activity;
 import android.app.Dialog;

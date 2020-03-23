@@ -28,7 +28,7 @@ import androidx.fragment.app.Fragment;
 import com.example.mechanic.CircleTransform;
 import com.example.mechanic.R;
 import com.example.mechanic.SettingActivity;
-import com.example.mechanic.model.CustomDialogBox;
+import com.example.mechanic.dialogBox.CustomDialogBox;
 import com.example.mechanic.model.Mechanic;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
