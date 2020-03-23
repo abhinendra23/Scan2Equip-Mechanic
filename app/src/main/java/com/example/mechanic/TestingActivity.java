@@ -2,6 +2,8 @@ package com.example.mechanic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +22,7 @@ public class TestingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                new RequestSentDialogBox(TestingActivity.this).show();
+
             }
         });
     }

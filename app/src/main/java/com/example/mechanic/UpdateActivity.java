@@ -3,6 +3,9 @@ package com.example.mechanic;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.mechanic.dialogBox.RequestSentDialogBox;
 import com.example.mechanic.model.Complaint;
 import com.example.mechanic.model.Request;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,6 +83,10 @@ public class UpdateActivity extends AppCompatActivity {
         submit_update.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                RequestSentDialogBox requestSentDialogBox = new RequestSentDialogBox(UpdateActivity.this);
+                requestSentDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                requestSentDialogBox.show();
 
                 Complaint complaint = Parcels.unwrap(getIntent().getParcelableExtra("complaint"));
 
