@@ -99,6 +99,8 @@ dependencies {
     // One New Scanner
     implementation 'me.dm7.barcodescanner:zxing:1.9'
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+
 
 //
 

@@ -17,13 +17,6 @@ public class TestingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
 
-        Button dialogBox = findViewById(R.id.dialogbox);
-        dialogBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-            }
-        });
     }
 }
