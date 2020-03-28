@@ -2,6 +2,8 @@ package com.example.mechanic.model;
 
 import org.parceler.Parcel;
 
+import java.util.Date;
+
 @Parcel
 public class Chat {
 
@@ -9,6 +11,7 @@ public class Chat {
     public String receiver;
     public String message;
     public boolean isseen;
+    public long messageTime;
 
     public Chat(String sender, String receiver, String message, boolean isseen) {
         this.sender = sender;
@@ -18,6 +21,7 @@ public class Chat {
     }
 
     public Chat() {
+        messageTime = new Date().getTime();
     }
 
     public String getSender() {
@@ -50,5 +54,13 @@ public class Chat {
 
     public void setIsseen(boolean isseen) {
         this.isseen = isseen;
+    }
+
+    public long getMessageTime() {
+        return messageTime;
+    }
+
+    public void setMessageTime(long messageTime) {
+        this.messageTime = messageTime;
     }
 }
