@@ -94,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-
                         if (task.isSuccessful()) {
 
                             SharedPreferences sharedPref = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
