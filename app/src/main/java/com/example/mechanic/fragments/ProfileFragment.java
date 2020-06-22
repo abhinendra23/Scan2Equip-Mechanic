@@ -79,52 +79,52 @@ public class ProfileFragment extends Fragment {
         profilePicChange = view.findViewById(R.id.s_change_profile);
         profilePic = view.findViewById(R.id.profilepic);
 
-        dialogBox = new CustomDialogBox(getActivity());
-        dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialogBox.show();
+//        dialogBox = new CustomDialogBox(getActivity());
+//        dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialogBox.show();
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-
-        name = view.findViewById(R.id.sm_profile_name);
-        email = view.findViewById(R.id.sm_profile_email);
-        phoneNumber = view.findViewById(R.id.sm_profile_phone);
-
-        databaseReference = FirebaseDatabase.getInstance()
-                .getReference("Users")
-                .child("ServiceMan")
-                .child(user.getUid());
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                Mechanic mechanic = dataSnapshot.getValue(Mechanic.class);
-                //Picasso.get().load(mechanic.getImageURL()).into(profilePic);
-                name.setText(mechanic.getUserName());
-                email.setText(mechanic.getEmail());
-
-                dialogBox.dismiss();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        storageReference = FirebaseStorage.getInstance().getReference().child(user.getUid()+".jpg");
-
-        profilePicChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                Activity activity = getActivity();
-//                if (activity != null)
-                startActivityForResult(i, 12);
-            }
-        });
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        name = view.findViewById(R.id.sm_profile_name);
+//        email = view.findViewById(R.id.sm_profile_email);
+//        phoneNumber = view.findViewById(R.id.sm_profile_phone);
+//
+//        databaseReference = FirebaseDatabase.getInstance()
+//                .getReference("Users")
+//                .child("ServiceMan")
+//                .child(user.getUid());
+//
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                Mechanic mechanic = dataSnapshot.getValue(Mechanic.class);
+//                //Picasso.get().load(mechanic.getImageURL()).into(profilePic);
+//                name.setText(mechanic.getUserName());
+//                email.setText(mechanic.getEmail());
+//
+//                dialogBox.dismiss();
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//
+//        storageReference = FirebaseStorage.getInstance().getReference().child(user.getUid()+".jpg");
+//
+//        profilePicChange.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+////                Activity activity = getActivity();
+////                if (activity != null)
+//                startActivityForResult(i, 12);
+//            }
+//        });
 
         return view;
     }

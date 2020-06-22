@@ -277,7 +277,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/logout"
         android:text="Logout"
-        android:background="#ABE7B2"
+        android:background="#21D83A"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:textSize="20sp"
