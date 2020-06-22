@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Mechanic"
@@ -32,7 +33,7 @@
         <activity android:name=".PendingComplaintsActivity" />
         <activity android:name=".BottomNavigationActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".IntroActivity">
 
             <intent-filter>

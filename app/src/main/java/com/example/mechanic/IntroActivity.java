@@ -2,7 +2,6 @@ package com.example.mechanic;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.mechanic.model.IntroScreenItem;
 import com.google.android.material.tabs.TabLayout;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class IntroActivity extends AppCompatActivity {
     IntroViewPagerAdapter introViewPagerAdapter ;
     TabLayout tabIndicator;
     Button btnNext;
-    int position = 0 ;
+    int position = 0;
     Button btnGetStarted;
     Animation btnAnim ;
     TextView tvSkip;
@@ -54,12 +52,11 @@ public class IntroActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_intro);
-
         // hide the action bar
 
 
-
         // ini views
+
         btnNext = findViewById(R.id.btn_next);
         btnGetStarted = findViewById(R.id.btn_get_started);
         tabIndicator = findViewById(R.id.tab_indicator);
@@ -94,8 +91,6 @@ public class IntroActivity extends AppCompatActivity {
 
                     position++;
                     screenPager.setCurrentItem(position);
-
-
                 }
 
                 if (position == mList.size()-1) { // when we rech to the last screen

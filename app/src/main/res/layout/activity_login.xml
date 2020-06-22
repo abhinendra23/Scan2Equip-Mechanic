@@ -69,7 +69,7 @@
                 android:id="@+id/textInputPassword"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-
+                app:passwordToggleEnabled="true"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
@@ -90,6 +90,7 @@
                 />
 
             <TextView
+                android:onClick="onForgetPassword"
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
@@ -100,7 +101,7 @@
             <TextView
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-
+                android:onClick="RegisterClick"
                 android:text="New user? Register Now"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"

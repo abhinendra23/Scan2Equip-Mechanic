@@ -31,13 +31,11 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-
     Button registerButton;
     EditText registerName, registerEmail, registerPassword;
 
     FirebaseAuth auth;
     FirebaseUser user;
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference userReference;
     FirebaseFunctions firebaseFunctions;
@@ -47,7 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_register);
-
 
         registerButton = findViewById(R.id.registerButton);
         registerName = findViewById(R.id.editTextName);
@@ -106,7 +103,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
                     }
                     else
                     {
@@ -114,18 +110,17 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     }
                 });
-
             }
         });
-
     }
 
     public void onLoginClick(View view){
         startActivity(new Intent(this,LoginActivity.class));
         overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
-
         changeStatusBarColor();
+        finish();
     }
+
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();

@@ -2,6 +2,7 @@ package com.example.mechanic;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mechanic.dialogBox.CustomDialogBox;
@@ -53,10 +55,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
+        //TODO : This next comment . Why ?
 //        if(mAuth.getCurrentUser()!=null)
 //        {
 //            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
 //        }
+
         customDialogBox = new CustomDialogBox(LoginActivity.this);
 
 
@@ -139,7 +143,69 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, RegisterActivity.class));
         overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
         finish();
+    }
+
+    public void RegisterClick(View view)
+    {
+        startActivity(new Intent(this,RegisterActivity.class));
+        overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+        finish();
+    }
+
+    public void onForgetPassword(View view)
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View mView = getLayoutInflater().inflate(R.layout.custom_dialog_one_input,null);
+
+        final EditText m_Text = (EditText)mView.findViewById(R.id.D1I_input);
+        Button confirm = (Button)mView.findViewById(R.id.D1I_confirm);
+        Button cancel = (Button)mView.findViewById(R.id.D1I_cancel);
+
+        builder.setView(mView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        final CustomDialogBox customDialogBox1 = new CustomDialogBox(this);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                customDialogBox1.show();
+                String text = m_Text.getText().toString();
+                alertDialog.dismiss();
+                mAuth.sendPasswordResetEmail(text).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(LoginActivity.this, "Email has been sent to your Registered Email", Toast.LENGTH_SHORT).show();
+                            customDialogBox1.dismiss();
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "AA gyi dikkat", Toast.LENGTH_SHORT).show();
+                            customDialogBox1.dismiss();
+                        }
+
+
+                    }
+                });
+            }
+        });
+
+        alertDialog.show();
 
     }
+
 
 }
