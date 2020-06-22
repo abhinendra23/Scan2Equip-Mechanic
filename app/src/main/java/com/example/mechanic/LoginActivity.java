@@ -53,10 +53,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-//        if(mAuth.getCurrentUser()!=null)
-//        {
-//            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
-//        }
+        if(mAuth.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+            finish();
+        }
         customDialogBox = new CustomDialogBox(LoginActivity.this);
 
 
