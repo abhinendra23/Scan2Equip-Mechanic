@@ -181,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.setCanceledOnTouchOutside(false);
 
         final CustomDialogBox customDialogBox1 = new CustomDialogBox(this);
+        customDialogBox1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
