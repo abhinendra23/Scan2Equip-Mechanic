@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:text="Rating:"
                         android:textColor="#1C9797"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@id/profilebkimg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.175"
