@@ -52,6 +52,9 @@ dependencies {
     //Firebase Cloud Storage
     implementation 'com.google.firebase:firebase-storage:19.1.1'
 
+    //Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
+
     // lottie
     implementation 'com.airbnb.android:lottie:3.3.1'
 
@@ -102,7 +105,7 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
 
-//
-
+    //Animated bottom nav
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
 
 }
