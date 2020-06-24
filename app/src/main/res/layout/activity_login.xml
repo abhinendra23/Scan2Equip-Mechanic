@@ -54,14 +54,13 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                app:boxStrokeColor="@color/colorPrimary">
+             >
 
                 <EditText
                     android:id="@+id/loginEmail"
                     style="@style/modifiedEditText"
-                    android:hint="@string/login_email_hint"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
-
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
