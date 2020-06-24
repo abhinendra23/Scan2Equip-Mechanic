@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".PendingComplaintsActivity"
@@ -233,31 +234,31 @@
                 <Button
                     android:id="@+id/sm_chat_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="35dp"
                     android:text="chat "
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="0dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:background="@drawable/transparent_button_border"
                     android:layout_gravity="center_vertical"
                     android:textColor="#F50A5A"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_marginRight="10dp"/>
 
                 <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="35dp"
                     android:id="@+id/update_button"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="0dp"
                     android:text="UPDATE"
                     android:textColor="#E01515"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/transparent_button_border"></Button>
 
                 <Button
                     android:id="@+id/sm_status_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_vertical"
                     android:text="status"
                     android:textColor="#4F5EB4"
@@ -272,4 +273,4 @@
     </RelativeLayout>
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

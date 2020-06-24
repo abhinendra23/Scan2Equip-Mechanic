@@ -105,7 +105,7 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
 
-//
-
+    //Animated bottom nav
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
 
 }

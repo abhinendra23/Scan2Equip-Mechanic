@@ -20,15 +20,16 @@ import com.example.mechanic.R;
 import com.example.mechanic.Requests;
 import com.example.mechanic.ScanQRActivity;
 import com.example.mechanic.adapters.ViewPagerAdapter;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
-    CardView scan;
-    CardView complaints;
-    CardView request;
+    MaterialCardView scan;
+    MaterialCardView complaints;
+    MaterialCardView request;
     ViewPager viewPager;
     LinearLayout sliderdotspanel;
     private int dotscount;
@@ -100,9 +101,9 @@ public class HomeFragment extends Fragment {
         //timer in viewpager
         autoScroll();
 
-        scan =(CardView) view.findViewById(R.id.scan);
-        complaints = (CardView) view.findViewById(R.id.complaints);
-        request = (CardView)view.findViewById(R.id.requests);
+        scan = view.findViewById(R.id.scan);
+        complaints = view.findViewById(R.id.complaints);
+        request = view.findViewById(R.id.requests);
 
 
 
@@ -119,7 +120,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity().getApplicationContext(), PendingComplaintsActivity.class);
                 startActivity(i);
-                getActivity().finish();
+
 
             }
         });
@@ -129,7 +130,7 @@ public class HomeFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity().getApplicationContext(), Requests.class);
                 startActivity(intent);
-                getActivity().finish();
+
             }
         });
 
@@ -139,7 +140,7 @@ public class HomeFragment extends Fragment {
     public void updateDetail() {
         Intent intent = new Intent(getActivity().getApplicationContext(), ScanQRActivity.class);
         startActivity(intent);
-        getActivity().finish();
+
     }
 
 
