@@ -17,6 +17,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:title="Profile"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:menu="@menu/toolbar_menu">
@@ -26,28 +27,28 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
+                    android:layout_marginTop="?actionBarSize"
                     android:id="@+id/profile_layout">
-
 
                     <Button
                         android:id="@+id/sm_chat_button"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:background="@drawable/btn_round_corner"
-                        android:backgroundTint="#ECCC9C"
+                        android:backgroundTint="#A593C6"
                         android:fontFamily="@font/tillana"
-                        android:textSize="16sp"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:text="Edit Profile "
                         android:textColor="#E6000000"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.839"
+                        app:layout_constraintHorizontal_bias="0.943"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.502" />
+                        app:layout_constraintVertical_bias="0.506" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profilepic"
@@ -56,24 +57,24 @@
                         android:src="@drawable/profilepicdemo"
                         app:layout_constraintBottom_toBottomOf="@id/profile_layout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.21"
+                        app:layout_constraintHorizontal_bias="0.191"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/profile_layout"
-                        app:layout_constraintVertical_bias="0.523">
+                        app:layout_constraintVertical_bias="0.318">
 
-                    </de.hdodenhof.circleimageview.CircleImageView>>
+                    </de.hdodenhof.circleimageview.CircleImageView>
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
                         android:id="@+id/s_change_profile"
+                        android:layout_width="24dp"
+                        android:layout_height="48dp"
                         android:src="@drawable/ic_plus"
                         app:layout_constraintBottom_toBottomOf="@id/profile_layout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.349"
+                        app:layout_constraintHorizontal_bias="0.333"
                         app:layout_constraintStart_toStartOf="@+id/profile_layout"
                         app:layout_constraintTop_toTopOf="@+id/profile_layout"
-                        app:layout_constraintVertical_bias="0.659"></ImageView>
+                        app:layout_constraintVertical_bias="0.539"></ImageView>
 
                     <TextView
                         android:id="@+id/s_rating"
@@ -84,15 +85,62 @@
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@id/profile_layout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.175"
+                        app:layout_constraintHorizontal_bias="0.77"
                         app:layout_constraintStart_toStartOf="@+id/profile_layout"
                         app:layout_constraintTop_toTopOf="@+id/profile_layout"
-                        app:layout_constraintVertical_bias="0.929"></TextView>
+                        app:layout_constraintVertical_bias="0.044"></TextView>
 
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/imprima"
+                        android:text="Abhinendra Gaurav"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/profilepic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.077"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <TextView
+                        android:id="@+id/profile_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/imprima"
+                        android:text="abcddcbkdn@gmail.com"
+                        android:drawableLeft="@drawable/email_small_size"
+                        android:drawablePadding="3dp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.172"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profilepic"
+                        app:layout_constraintVertical_bias="0.162" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_call_black_24dp"
+                        android:drawablePadding="5dp"
+                        android:fontFamily="@font/imprima"
+                        android:text="65465313312"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.125"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_email"
+                        app:layout_constraintVertical_bias="0.226" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
+    <include layout="@layout/content_profile" />
 
 
 
