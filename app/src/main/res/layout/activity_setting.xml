@@ -12,7 +12,99 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="8dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account"
+            android:fontFamily="@font/imprima"
+            android:textColor="#000000"
+            android:textSize="20sp"
+
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="5dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#BDBBBB"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/edit_profile_ll">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit_account_img"
+                android:adjustViewBounds="true"
+                android:maxWidth="25dp"
+                android:maxHeight="25dp"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_profile_tv"
+                android:text="Edit Profile"
+                android:textColor="#000000"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="15sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/change_password_ll">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/change_password_img"
+                android:adjustViewBounds="true"
+                android:maxWidth="25dp"
+                android:maxHeight="25dp"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_password_tv"
+                android:text="Change Password"
+                android:textColor="#000000"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="15sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +118,8 @@
                 android:text="Basic"
                 android:textColor="#000000"
                 android:textSize="20sp"
+                android:fontFamily="@font/imprima"
+
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="3dp"/>
@@ -52,7 +146,7 @@
                     />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_noification"
                     android:text="Notifications"
@@ -65,7 +159,13 @@
                     android:textSize="15sp"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
+               <com.suke.widget.SwitchButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/notification_toggle"
+                   android:layout_marginLeft="120dp"
+                   android:layout_gravity="bottom"
+                   />
             </LinearLayout>
 
 
@@ -89,7 +189,7 @@
                     android:layout_marginTop="8dp"
                     />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_fingerprint"
                     android:text="Fingerprint"
@@ -101,6 +201,14 @@
                     android:textSize="15sp"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.suke.widget.SwitchButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fingerprint_toggle"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="133dp"
+                    android:layout_gravity="bottom"
+                    />
             </LinearLayout>
 
 
@@ -119,8 +227,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Support"
+                android:fontFamily="@font/imprima"
                 android:textColor="#000000"
                 android:textSize="20sp"
+
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="5dp"
                 />
@@ -237,6 +347,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:id="@+id/setting_about_developers">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_developer"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="25dp"
+                    android:maxHeight="25dp"
+                    android:scaleType="fitCenter"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_about_developers"
+                    android:text="About Developers"
+
+                    android:textColor="#000000"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:id="@+id/setting_about_our_app">
 
                 <ImageView
@@ -277,9 +421,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/logout"
         android:text="Logout"
-        android:background="#21D83A"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:background="#ABE7B2"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:textSize="20sp"
         android:fontFamily="serif"
         android:layout_alignParentBottom="true"/>
