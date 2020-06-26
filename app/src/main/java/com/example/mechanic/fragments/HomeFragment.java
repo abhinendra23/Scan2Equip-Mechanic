@@ -27,9 +27,9 @@ import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
-    MaterialCardView scan;
-    MaterialCardView complaints;
-    MaterialCardView request;
+    CardView scan;
+    CardView complaints;
+    CardView request;
     ViewPager viewPager;
     LinearLayout sliderdotspanel;
     private int dotscount;

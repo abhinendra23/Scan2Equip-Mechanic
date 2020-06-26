@@ -52,6 +52,7 @@ import java.util.HashMap;
 public class ProfileFragment extends Fragment {
 
     ImageView profilePicChange, profilePic;
+    TextView s_rating;
 
     StorageReference storageReference;
     DatabaseReference databaseReference;
@@ -78,53 +79,60 @@ public class ProfileFragment extends Fragment {
         setHasOptionsMenu(true);
         profilePicChange = view.findViewById(R.id.s_change_profile);
         profilePic = view.findViewById(R.id.profilepic);
+        s_rating = view.findViewById(R.id.s_rating);
 
-//        dialogBox = new CustomDialogBox(getActivity());
-//        dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        dialogBox.show();
+        dialogBox = new CustomDialogBox(getActivity());
+        dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogBox.show();
 
-//        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        name = view.findViewById(R.id.sm_profile_name);
+        email = view.findViewById(R.id.sm_profile_email);
+        phoneNumber = view.findViewById(R.id.sm_profile_phone);
 //
-//        name = view.findViewById(R.id.sm_profile_name);
-//        email = view.findViewById(R.id.sm_profile_email);
-//        phoneNumber = view.findViewById(R.id.sm_profile_phone);
-//
-//        databaseReference = FirebaseDatabase.getInstance()
-//                .getReference("Users")
-//                .child("ServiceMan")
-//                .child(user.getUid());
-//
-//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                Mechanic mechanic = dataSnapshot.getValue(Mechanic.class);
-//                //Picasso.get().load(mechanic.getImageURL()).into(profilePic);
-//                name.setText(mechanic.getUserName());
-//                email.setText(mechanic.getEmail());
-//
-//                dialogBox.dismiss();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//
-//        storageReference = FirebaseStorage.getInstance().getReference().child(user.getUid()+".jpg");
-//
-//        profilePicChange.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-////                Activity activity = getActivity();
-////                if (activity != null)
-//                startActivityForResult(i, 12);
-//            }
-//        });
+        databaseReference = FirebaseDatabase.getInstance()
+                .getReference("Users")
+                .child("Mechanic")
+                .child(user.getUid());
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Mechanic mechanic = dataSnapshot.getValue(Mechanic.class);
+
+                if(dataSnapshot.hasChild("profilePicLink"))
+                    Picasso.get().load(mechanic.getProfilePicLink()).into(profilePic);
+
+                name.setText(mechanic.getUserName());
+                email.setText(mechanic.getEmail());
+                s_rating.setText(Float.toString(mechanic.getOverallRating()) );
+                s_rating.setCompoundDrawablesWithIntrinsicBounds(R.drawable.star,0,0,0);
+
+
+                dialogBox.dismiss();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        storageReference = FirebaseStorage.getInstance().getReference().child(user.getUid()+".jpeg");
+
+        profilePicChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Activity activity = getActivity();
+                if (activity != null)
+                    startActivityForResult(i, 12);
+            }
+        });
 
         return view;
     }
@@ -195,7 +203,7 @@ public class ProfileFragment extends Fragment {
 
                                     HashMap<String, Object> updateProfilePic = new HashMap<>();
 
-                                    updateProfilePic.put("/Users/ServiceMan/" + user.getUid() + "/imageURL", imageLink);
+                                    updateProfilePic.put("/Users/Mechanic/" + user.getUid() + "/profilePicLink", imageLink);
 
                                     FirebaseDatabase.getInstance().getReference().updateChildren(updateProfilePic).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override

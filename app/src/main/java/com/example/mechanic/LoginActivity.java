@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,13 +57,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        //TODO : This next comment . Why ?
-//        if(mAuth.getCurrentUser()!=null)
-//        {
-//            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
-//        }
+
+        if(mAuth.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+            finish();
+        }
 
         customDialogBox = new CustomDialogBox(LoginActivity.this);
+        customDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         loginButton = findViewById(R.id.loginButton);
@@ -79,9 +83,21 @@ public class LoginActivity extends AppCompatActivity {
 
                 String email = loginEmail.getText().toString();
                 String password = loginPassword.getText().toString();
-                customDialogBox.show();
 
-                login(email,password);
+                email = email.trim();
+                if(email.equals(""))
+                {
+                    Toast.makeText(LoginActivity.this, "Email should be valid", Toast.LENGTH_SHORT).show();
+                }
+                else if(password.length()<6)
+                {
+                    Toast.makeText(LoginActivity.this, "Password should be atleast 6 character long", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    customDialogBox.show();
+                    login(email, password);
+
+                }
 
             }
         });
@@ -165,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.setCanceledOnTouchOutside(false);
 
         final CustomDialogBox customDialogBox1 = new CustomDialogBox(this);
+        customDialogBox1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
