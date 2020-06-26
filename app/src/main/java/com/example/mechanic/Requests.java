@@ -1,6 +1,7 @@
 package com.example.mechanic;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -18,13 +19,17 @@ public class Requests extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requests);
-
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tabLayout=(TabLayout)findViewById(R.id.s_tabLayout);
         viewPager=(ViewPager)findViewById(R.id.s_viewpager);
         tabLayout.addTab(tabLayout.newTab().setText("PENDING"));
         tabLayout.addTab(tabLayout.newTab().setText("COMPLETED"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
 
         final TabAdapter tabAdapter = new TabAdapter(this,getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(tabAdapter);
@@ -49,5 +54,10 @@ public class Requests extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

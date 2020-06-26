@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mechanic.R;
@@ -24,6 +25,8 @@ public class RequestPendingAdapter extends FirebaseRecyclerPagingAdapter<Request
 
     Context c;
     List<Request> x ;      //Define your list here    - Aditya
+    private final int[] mColors = {R.color.list_color_1,R.color.list_color_2,R.color.list_color_3,R.color.list_color_4,R.color.list_color_5,
+            R.color.list_color_6,R.color.list_color_7,R.color.list_color_8,R.color.list_color_9,R.color.list_color_10,R.color.list_color_11};
 
     /**
      * Construct a new FirestorePagingAdapter from the given {@link DatabasePagingOptions}.
@@ -46,7 +49,8 @@ public class RequestPendingAdapter extends FirebaseRecyclerPagingAdapter<Request
 
     @Override
     protected void onBindViewHolder(@NonNull MyHolder viewHolder, int position, @NonNull Request model) {
-
+        int bgColor = ContextCompat.getColor(c, mColors[position % 12]);
+        viewHolder.cardview.setCardBackgroundColor(bgColor);
         viewHolder.bind(model);
     }
 

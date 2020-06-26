@@ -7,10 +7,20 @@
     android:orientation="vertical"
     tools:context=".Requests">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:title="Requests"
+        android:background="#23AC9F"
+        app:titleTextColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/s_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#23AC9F"
+        app:tabIndicatorColor="#fff"
+        app:tabTextColor="#fff"
         />
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/s_viewpager"
