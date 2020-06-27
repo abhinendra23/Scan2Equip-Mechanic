@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="225dp"
+    android:layout_height="225dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/review_card"
     android:layout_margin="10dp"
@@ -10,8 +10,8 @@
     app:cardUseCompatPadding="true"
    >
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="18dp">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="15dp"
@@ -74,24 +74,25 @@
                 android:text="12/07/2019"
                 android:fontFamily="@font/imprima"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="4dp"
                 />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:nestedScrollingEnabled="true"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/review_mesg"
+            android:text="review_mesg"
             android:textSize="15sp"
-            android:maxEms="6"
-            android:singleLine="false"
-            app:autoSizeTextType="uniform"
-            android:id="@+id/review_mesg_tv"
+            android:maxEms="15"
+           app:autoSizeTextType="uniform"
+           android:id="@+id/review_mesg_tv"
             android:fontFamily="@font/tillana"
             />
-    </LinearLayout>
+    </ScrollView>
     </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
