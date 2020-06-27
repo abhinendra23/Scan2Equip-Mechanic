@@ -67,7 +67,7 @@
                         app:layout_constraintHorizontal_bias="0.31"
                         app:layout_constraintStart_toStartOf="@+id/profile_layout"
                         app:layout_constraintTop_toTopOf="@+id/profile_layout"
-                        app:layout_constraintVertical_bias="0.47"></ImageView>
+                        app:layout_constraintVertical_bias="0.47" />
 
                     <TextView
                         android:id="@+id/s_rating"
@@ -81,7 +81,7 @@
                         app:layout_constraintHorizontal_bias="0.796"
                         app:layout_constraintStart_toStartOf="@+id/profile_layout"
                         app:layout_constraintTop_toTopOf="@+id/profile_layout"
-                        app:layout_constraintVertical_bias="0.367"></TextView>
+                        app:layout_constraintVertical_bias="0.367" />
 
                     <TextView
                         android:id="@+id/sm_profile_name"
