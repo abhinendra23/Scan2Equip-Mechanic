@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".GetMachineDetailsActivity"
+    android:background="@android:color/white"
+
     tools:showIn="@layout/activity_get_machine_details"
     >
 
@@ -14,38 +15,45 @@
         android:id="@+id/Nothing_much"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+
         android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         >
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="30dp"-->
+
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_info"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                ></ImageView>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:text="MACHINE INFO"-->
+<!--                android:textColor="#6699cc"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold"-->
+<!--                />-->
+
+<!--        </LinearLayout>-->
+<!--        <View style="@style/DetailsView"-->
+<!--            android:background="#979696"/>-->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_info"
-                android:layout_gravity="start"
-                android:layout_marginRight="15dp"
-                ></ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="MACHINE INFO"
-                android:textColor="#6699cc"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
-
-        </LinearLayout>
-        <View style="@style/DetailsView"
-            android:background="#979696"/>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/btn_round_corner"
+            android:backgroundTint="@color/list_color_1"
+            >
         <LinearLayout
             android:id="@+id/serialNumber"
             android:layout_width="match_parent"
@@ -55,42 +63,48 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_serial_number"
-                android:layout_gravity="start"
-                android:layout_marginRight="15dp"
-                ></ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_serial_number"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                ></ImageView>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textItem1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/imprima"
                     android:text="Serial Number:"
                     android:textColor="#F5474747"
-                    android:textSize="15sp"
+
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/machineDetailsSerialNo"
                     android:layout_width="fill_parent"
-
+                    android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="#F5474747"
+                    android:fontFamily="@font/imprima"
+                    android:textSize="15sp"
                     android:layout_marginLeft="10dp"
                     />
             </LinearLayout>
 
         </LinearLayout>
-        <View style="@style/DetailsView"
-            android:background="#C5C5C5"/>
+<!--        <View style="@style/DetailsView"-->
+<!--            android:background="#C5C5C5"/>-->
         <LinearLayout
             android:id="@+id/department"
             android:layout_width="match_parent"
@@ -100,24 +114,27 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_department"
-                android:layout_gravity="start"
-                android:layout_marginRight="15dp"
-                ></ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_department"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                ></ImageView>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/textItem2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Department:"
+                    android:fontFamily="@font/imprima"
                     android:textColor="#F5474747"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
                     />
@@ -126,15 +143,17 @@
                     android:id="@+id/machineDetailsDepartment"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="#F5474747"
                     android:layout_marginLeft="10dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/imprima"
                     />
             </LinearLayout>
 
         </LinearLayout>
 
-        <View style="@style/DetailsView"
-            android:background="#C5C5C5"/>
+<!--        <View style="@style/DetailsView"-->
+<!--            android:background="#C5C5C5"/>-->
         <LinearLayout
             android:id="@+id/serviceTime"
             android:layout_width="match_parent"
@@ -144,25 +163,28 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_servicetime"
-                android:layout_gravity="start"
-                android:layout_marginRight="15dp"
-                ></ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_servicetime"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                ></ImageView>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/textItem3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Service Time:"
                     android:textColor="#F5474747"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/imprima"
                     android:layout_marginLeft="10dp"
                     />
 
@@ -170,15 +192,17 @@
                     android:id="@+id/machineDetailsServiceTime"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="#F5474747"
                     android:layout_marginLeft="10dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/imprima"
                     />
             </LinearLayout>
 
         </LinearLayout>
 
-        <View style="@style/DetailsView"
-            android:background="#C5C5C5"/>
+<!--        <View style="@style/DetailsView"-->
+<!--            android:background="#C5C5C5"/>-->
         <LinearLayout
             android:id="@+id/installation_date"
             android:layout_width="match_parent"
@@ -188,41 +212,45 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_date_of_installation"
-                android:layout_gravity="start"
-                android:layout_marginRight="15dp"
-                ></ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_date_of_installation"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                ></ImageView>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/textItem4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date of Installation:"
                     android:textColor="#F5474747"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/imprima"
                     android:layout_marginLeft="10dp"
                     />
 
                 <TextView
                     android:id="@+id/machineDetailsInstallationDate"
                     android:layout_width="fill_parent"
-
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="#F5474747"
                     android:layout_marginLeft="10dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/imprima"
                     />
             </LinearLayout>
 
         </LinearLayout>
-        <View style="@style/DetailsView"
-            android:background="#C5C5C5"/>
+<!--        <View style="@style/DetailsView"-->
+<!--            android:background="#C5C5C5"/>-->
 
         <LinearLayout
             android:id="@+id/generator"
@@ -233,25 +261,28 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_manager"
-                android:layout_gravity="start"
-                android:layout_marginRight="15dp"
-                ></ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_manager"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                ></ImageView>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/textItem5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Generated By:"
                     android:textColor="#F5474747"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/imprima"
                     android:layout_marginLeft="10dp"
                     />
 
@@ -259,35 +290,42 @@
                     android:id="@+id/generator_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="#F5474747"
                     android:layout_marginLeft="10dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/imprima"
                     />
             </LinearLayout>
 
         </LinearLayout>
-        <View style="@style/DetailsView"
-            android:background="#C5C5C5"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/generateComplaint"
-                style="@style/loginButton"
-                android:layout_height="38dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:text="Generate Complaint" />
+<!--            <Button-->
+<!--                android:id="@+id/generateComplaint"-->
+<!--                style="@style/loginButton"-->
+<!--                android:layout_height="38dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginRight="5dp"-->
+<!--                android:text="Generate Complaint" />-->
             <Button
                 android:id="@+id/show_history"
                 android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Show History"
                 android:paddingRight="5dp"
-
-                style="@style/loginButton"
+                android:background="@drawable/btn_round_corner"
+                android:backgroundTint="#E44545"
+                android:textColor="#fff"
+                android:fontFamily="@font/tillana"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 />
 
         </LinearLayout>
