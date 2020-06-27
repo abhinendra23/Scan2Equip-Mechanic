@@ -12,11 +12,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Reviews:-"
         android:textStyle="bold"
         android:fontFamily="@font/imprima"
         android:textSize="18sp"
-        android:textColor="#000"
+        android:textColor="#0087E1"
         android:layout_marginLeft="10dp"
         />
     <androidx.recyclerview.widget.RecyclerView

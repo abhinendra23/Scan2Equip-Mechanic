@@ -24,12 +24,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mechanic.CircleTransform;
 import com.example.mechanic.R;
 import com.example.mechanic.SettingActivity;
+import com.example.mechanic.adapters.ReviewAdapter;
 import com.example.mechanic.dialogBox.CustomDialogBox;
+import com.example.mechanic.model.Machine;
+import com.example.mechanic.model.MechRating;
 import com.example.mechanic.model.Mechanic;
+import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +45,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -62,6 +70,14 @@ public class ProfileFragment extends Fragment {
 
     TextView name,email,phoneNumber;
 
+
+    RecyclerView recyclerView_machine;
+   ReviewAdapter reviewAdapter;
+
+    FirebaseAuth auth;
+
+    FirebaseDatabase firebaseDatabase;
+    LinearLayoutManager HorizontalLayout;
 
     private Toolbar mTopToolbar;
     public ProfileFragment() {
@@ -135,6 +151,35 @@ public class ProfileFragment extends Fragment {
                     startActivityForResult(i, 12);
             }
         });
+
+
+        //Horizontal recycler view
+        recyclerView_machine=view.findViewById(R.id.horizontal_rv);
+        recyclerView_machine.setLayoutManager(new LinearLayoutManager(getActivity()));
+        HorizontalLayout
+                = new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false);
+        recyclerView_machine.setLayoutManager(HorizontalLayout);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        Query baseQuery = firebaseDatabase.getReference("Users").child("Mechanic").child(user.getUid()).child("Ratings");
+
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(10)
+                .setPageSize(20)
+                .build();
+
+        DatabasePagingOptions<MechRating> options = new DatabasePagingOptions.Builder<MechRating>()
+                .setLifecycleOwner(this)
+                .setQuery(baseQuery,config,MechRating.class)
+                .build();
+
+        reviewAdapter = new ReviewAdapter(options,getActivity().getApplicationContext());
+        recyclerView_machine.setAdapter(reviewAdapter);
+        reviewAdapter.startListening();
 
         return view;
     }
