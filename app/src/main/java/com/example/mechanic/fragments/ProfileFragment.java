@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -88,6 +89,9 @@ public class ProfileFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     LinearLayoutManager HorizontalLayout;
 
+    EditText nameEt,emailEt;
+    Button save,cancel;
+
     private Toolbar mTopToolbar;
     public ProfileFragment() {
         // Required empty public constructor
@@ -110,6 +114,10 @@ public class ProfileFragment extends Fragment {
         editButton = view.findViewById(R.id.edit_button);
         profileLayout = view.findViewById(R.id.profile_layout);
         profileEditLayout = view.findViewById(R.id.profile_edit_layout);
+        nameEt = view.findViewById(R.id.edit_profile_name);
+        emailEt = view.findViewById(R.id.edit_profile_email);
+        save = view.findViewById(R.id.save_edit_profile);
+        cancel = view.findViewById(R.id.cancel_edit_profile);
 
 //        int distance = 8;
 //        float scale = getActivity().getResources().getDisplayMetrics().density;
@@ -234,6 +242,42 @@ public class ProfileFragment extends Fragment {
         recyclerView_machine.setAdapter(reviewAdapter);
         reviewAdapter.startListening();
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Context context = getActivity().getApplicationContext();
+                AnimatorSet flipOut = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_out);
+                AnimatorSet flipIn = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_in);
+                flipIn.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        profileLayout.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        profileEditLayout.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                flipOut.setTarget(profileEditLayout);
+                flipIn.setTarget(profileLayout);
+                flipOut.start();
+                flipIn.start();
+
+
+            }
+        });
         return view;
     }
 

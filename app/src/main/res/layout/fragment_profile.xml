@@ -27,14 +27,77 @@
 
                     android:id="@+id/profile_edit_layout">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hello"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        >
+                       <EditText
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:id="@+id/edit_profile_name"
+                           android:text="Name"
+                           android:fontFamily="@font/imprima"
+                           android:layout_marginBottom="10dp"
+                           />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/edit_profile_email"
+                            android:text="Email"
+                            android:fontFamily="@font/imprima"
+                           android:layout_marginBottom="10dp"
+                            />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/edit_profile_phone"
+                            android:text="5651432123213"
+                            android:fontFamily="@font/imprima"
+                            android:layout_marginBottom="15dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="100dp"
+                            >
+                            <Button
+                                android:id="@+id/cancel_edit_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/btn_round_corner"
+                                android:backgroundTint="#FF1919"
+                                android:fontFamily="@font/tillana"
+                                android:textStyle="bold"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:text="Cancel "
+                                android:textColor="#fff" />
+
+                            <Button
+                                android:id="@+id/save_edit_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/btn_round_corner"
+                                android:backgroundTint="#A1E8A8"
+                                android:fontFamily="@font/tillana"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:textStyle="bold"
+                                android:text=" save "
+                                android:textColor="#E6000000"></Button>
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,6 +169,7 @@
                         app:layout_constraintStart_toStartOf="@+id/profile_layout"
                         app:layout_constraintTop_toTopOf="@+id/profile_layout"
                         app:layout_constraintVertical_bias="0.367" />
+
 
                     <TextView
                         android:id="@+id/sm_profile_name"
