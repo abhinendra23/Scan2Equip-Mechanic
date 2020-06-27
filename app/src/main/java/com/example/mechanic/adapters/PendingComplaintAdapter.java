@@ -2,17 +2,20 @@ package com.example.mechanic.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mechanic.R;
@@ -35,7 +38,8 @@ import java.util.List;
 public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Complaint,PendingComplaintAdapter.MyHolder> {
 
     Context c;
-
+    private final int[] mColors = {R.color.list_color_1,R.color.list_color_2,R.color.list_color_3,R.color.list_color_4,R.color.list_color_5,
+            R.color.list_color_6,R.color.list_color_7,R.color.list_color_8,R.color.list_color_9,R.color.list_color_10,R.color.list_color_11};
     /**
      * Construct a new FirestorePagingAdapter from the given {@link DatabasePagingOptions}.
      *
@@ -60,6 +64,8 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
 
     @Override
     protected void onBindViewHolder(@NonNull MyHolder viewHolder, int position, @NonNull Complaint model) {
+        int bgColor = ContextCompat.getColor(c, mColors[position % 12]);
+        viewHolder.cardView.setCardBackgroundColor(bgColor);
         viewHolder.bind(model);
     }
 
@@ -77,6 +83,7 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
         CardView cardView;
         LinearLayout ll_hide;
         Button updateButton ,chatButton, statusButton;
+        ImageView expand;
 
         public MyHolder(@NonNull final View itemView)
         {
@@ -90,9 +97,10 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
             pendingComplaintMachineId = itemView.findViewById((R.id.sm_pending_complaint_machine_id));
             chatButton = itemView.findViewById(R.id.sm_chat_button);
             statusButton = itemView.findViewById(R.id.sm_status_button);
-
+            expand = itemView.findViewById(R.id.dropdown);
             cardView = itemView.findViewById(R.id.cardview12);
             ll_hide = itemView.findViewById(R.id.ll_hide12);
+            ll_hide.setVisibility(View.GONE);
 //            public void onClick()
 //            {
 //
@@ -104,9 +112,19 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
 
 
 //                    Complaint complaint = pendingComplaintList.get(getAdapterPosition());
-////                    complaint.setExpanded(!complaint.isExpanded());
+//                    complaint.setExpanded(!complaint.isExpanded());
 //                    notifyItemChanged(getAdapterPosition());
+                    if(ll_hide.getVisibility()==View.GONE)
+                    {
+                        ll_hide.setVisibility(View.VISIBLE);
 
+                        expand.setRotation(360);
+                    }
+                    else
+                    {
+                        ll_hide.setVisibility(View.GONE);
+                        expand.setRotation(-90);
+                    }
 //
                 }
             });
@@ -204,7 +222,7 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
 
 //        boolean isExpanded = pendingComplaintList.get(position).isExpanded();
             boolean isExpanded = true;
-            ll_hide.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+       //     ll_hide.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         }
 
     }

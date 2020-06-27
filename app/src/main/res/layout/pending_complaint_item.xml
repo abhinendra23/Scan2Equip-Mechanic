@@ -11,6 +11,7 @@
     android:orientation="vertical"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
+
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -33,18 +34,19 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     >
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_manager"
-                        android:layout_marginRight="5dp">
+<!--                    <ImageView-->
+<!--                        android:layout_width="15dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/ic_manager"-->
+<!--                        android:layout_marginRight="5dp">-->
 
-                    </ImageView>
+<!--                    </ImageView>-->
                     <TextView
                         android:id="@+id/sm_pending_complaint_genratorName1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Responsibleman:"
+                        android:text="Manager:"
+                        android:fontFamily="@font/imprima"
                         android:textStyle="bold"
                         android:textColor="#363333"
                         android:textSize="15sp" />
@@ -54,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="Aditya Garg"
+                        android:fontFamily="@font/imprima"
                         android:layout_marginRight="70dp"
                         android:textColor="#1A1717"
                         android:textSize="15sp" />
@@ -66,16 +69,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     >
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_machine"
-                        android:layout_marginRight="5dp"/>
+<!--                    <ImageView-->
+<!--                        android:layout_width="15dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/ic_machine"-->
+<!--                        android:layout_marginRight="5dp"/>-->
                     <TextView
                         android:id="@+id/sm_pending_complaint_machine_id1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Machine Id:"
+                        android:fontFamily="@font/imprima"
                         android:textStyle="bold"
                         android:textColor="#363333"
                         android:textSize="15sp" />
@@ -83,7 +87,8 @@
                         android:id="@+id/sm_pending_complaint_machine_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="59dp"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/imprima"
                         android:text="111111111"
                         android:textColor="#1A1717"
                         android:textSize="15sp" />
@@ -95,16 +100,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     >
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_complain"
-                        android:layout_marginRight="5dp"/>
+<!--                    <ImageView-->
+<!--                        android:layout_width="15dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/ic_complain"-->
+<!--                        android:layout_marginRight="5dp"/>-->
                     <TextView
                         android:id="@+id/sm_pending_complaint_Id1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Complain Id:"
+                        android:fontFamily="@font/imprima"
                         android:textStyle="bold"
                         android:textColor="#363333"
                         android:textSize="15sp" />
@@ -112,8 +118,9 @@
                         android:id="@+id/pending_complaint_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="53dp"
+                        android:layout_marginLeft="7dp"
                         android:text="111111111"
+                        android:fontFamily="@font/imprima"
                         android:textColor="#1A1717"
                         android:textSize="15sp" />
 
@@ -123,17 +130,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     >
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_date_of_installation"
-                        android:layout_marginRight="5dp"/>
+<!--                    <ImageView-->
+<!--                        android:layout_width="15dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/ic_date_of_installation"-->
+<!--                        android:layout_marginRight="5dp"/>-->
                     <TextView
                         android:id="@+id/sm_pending_complaint_date1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Date(Generated):"
                         android:textStyle="bold"
+                        android:fontFamily="@font/imprima"
                         android:textColor="#363333"
                         android:textSize="15sp" />
                     <TextView
@@ -142,6 +150,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="17dp"
                         android:text="21/07/2020"
+                        android:fontFamily="@font/imprima"
                         android:textColor="#1A1717"
                         android:textSize="15sp" />
 
@@ -154,14 +163,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_alignParentRight="true">
-                <ImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:layout_width="70dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/ic_profile"
+                    android:src="@drawable/profilepicdemo"
                     />
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:rotation="-90"
                     android:id="@+id/dropdown"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
@@ -178,6 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll1"
+
             android:orientation="vertical"
             android:layout_marginTop="10dp">
 
@@ -193,17 +204,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_description"
-                    android:layout_marginRight="5dp"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/ic_description"-->
+<!--                    android:layout_marginRight="5dp"/>-->
                 <TextView
                     android:id="@+id/sm_pending_complaint_description1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="Description"
+                    android:fontFamily="@font/imprima"
                     android:textStyle="bold"
                     android:textColor="#363333"
                     android:textSize="15sp" />
@@ -215,6 +227,7 @@
                 android:layout_margin="5dp"
                 android:text="I have completed my work for repairing computer.All thing are now working nice."
                 android:textColor="#4c4c4c"
+                android:fontFamily="@font/imprima"
                 android:textSize="15sp" />
             <View
                 android:layout_width="match_parent"
@@ -226,7 +239,7 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
@@ -235,34 +248,45 @@
                     android:id="@+id/sm_chat_button"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:text="chat "
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/btn_round_corner"
+                    android:backgroundTint="#ECCC9C"
+                    android:fontFamily="@font/tillana"
+                    android:textStyle="bold"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:background="@drawable/transparent_button_border"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="#F50A5A"
-                    android:layout_marginRight="10dp"/>
+                    android:text="chat "
+                    android:textColor="#E6000000" />
 
                 <Button
+                    android:id="@+id/update_button"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:id="@+id/update_button"
-                    android:layout_marginLeft="0dp"
-                    android:text="UPDATE"
-                    android:textColor="#E01515"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/transparent_button_border"></Button>
+                    android:background="@drawable/btn_round_corner"
+                    android:backgroundTint="#B1DCF3"
+                    android:fontFamily="@font/tillana"
+                    android:textStyle="bold"
+                    android:text="UPDATE"
+                    android:textColor="#E6000000"></Button>
 
                 <Button
                     android:id="@+id/sm_status_button"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_gravity="center_vertical"
                     android:text="status"
-                    android:textColor="#4F5EB4"
-                    android:background="@drawable/transparent_button_border"/>
+                    android:fontFamily="@font/tillana"
+                    android:textStyle="bold"
+                    android:textColor="#E6000000"
+                    android:background="@drawable/btn_round_corner"
+                    android:backgroundTint="#A1E8A8"
+                    />
             </LinearLayout>
 
 

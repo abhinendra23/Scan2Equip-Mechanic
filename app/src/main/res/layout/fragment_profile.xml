@@ -6,69 +6,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ProfileFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@android:color/white"
-        android:fitsSystemWindows="false">
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="@color/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:toolbarId="@+id/toolbar"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="48dp"
-                app:expandedTitleTextAppearance="@style/TransparentText">
+                android:layout_height="?attr/actionBarSize"
+                app:title="Profile"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:menu="@menu/toolbar_menu">
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="250dp"
+                    android:layout_marginTop="?actionBarSize"
+                    android:id="@+id/profile_layout">
 
-                    <ImageView
-                        android:id="@+id/profilebkimg"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:src="@drawable/profilebackground"
-                        tools:ignore="MissingConstraints" />
-
-
+                    <Button
+                        android:id="@+id/sm_chat_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:background="@drawable/btn_round_corner"
+                        android:backgroundTint="#A593C6"
+                        android:fontFamily="@font/tillana"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="Edit Profile "
+                        android:textColor="#E6000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.943"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.506" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profilepic"
                         android:layout_width="92dp"
                         android:layout_height="93dp"
-
-                        app:layout_constraintBottom_toBottomOf="@id/profilebkimg"
+                        android:src="@drawable/profilepicdemo"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_layout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.21"
+                        app:layout_constraintHorizontal_bias="0.191"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/profilebkimg"
-                        app:layout_constraintVertical_bias="0.523">
+                        app:layout_constraintTop_toTopOf="@+id/profile_layout"
+                        app:layout_constraintVertical_bias="0.318">
 
-                    </de.hdodenhof.circleimageview.CircleImageView>>
+                    </de.hdodenhof.circleimageview.CircleImageView>
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
                         android:id="@+id/s_change_profile"
+                        android:layout_width="24dp"
+                        android:layout_height="48dp"
                         android:src="@drawable/ic_plus"
-                        app:layout_constraintBottom_toBottomOf="@id/profilebkimg"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_layout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.349"
-                        app:layout_constraintStart_toStartOf="@+id/profilebkimg"
-                        app:layout_constraintTop_toTopOf="@+id/profilebkimg"
-                        app:layout_constraintVertical_bias="0.659"></ImageView>
+                        app:layout_constraintHorizontal_bias="0.333"
+                        app:layout_constraintStart_toStartOf="@+id/profile_layout"
+                        app:layout_constraintTop_toTopOf="@+id/profile_layout"
+                        app:layout_constraintVertical_bias="0.539"></ImageView>
 
                     <TextView
                         android:id="@+id/s_rating"
@@ -77,29 +83,69 @@
                         android:text="Rating:"
                         android:textColor="#1C9797"
                         android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="@id/profilebkimg"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_layout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.175"
-                        app:layout_constraintStart_toStartOf="@+id/profilebkimg"
-                        app:layout_constraintTop_toTopOf="@+id/profilebkimg"
-                        app:layout_constraintVertical_bias="0.929"></TextView>
+                        app:layout_constraintHorizontal_bias="0.77"
+                        app:layout_constraintStart_toStartOf="@+id/profile_layout"
+                        app:layout_constraintTop_toTopOf="@+id/profile_layout"
+                        app:layout_constraintVertical_bias="0.044"></TextView>
 
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/imprima"
+                        android:text="Abhinendra Gaurav"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/profilepic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.077"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <TextView
+                        android:id="@+id/profile_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/imprima"
+                        android:text="abcddcbkdn@gmail.com"
+                        android:drawableLeft="@drawable/email_small_size"
+                        android:drawablePadding="3dp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.172"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profilepic"
+                        app:layout_constraintVertical_bias="0.162" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_call_black_24dp"
+                        android:drawablePadding="5dp"
+                        android:fontFamily="@font/imprima"
+                        android:text="65465313312"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.125"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_email"
+                        app:layout_constraintVertical_bias="0.226" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:menu="@menu/toolbar_menu">
-                </androidx.appcompat.widget.Toolbar>
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+    <include layout="@layout/content_profile" />
 
-        </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_profile" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
 
 </FrameLayout>
