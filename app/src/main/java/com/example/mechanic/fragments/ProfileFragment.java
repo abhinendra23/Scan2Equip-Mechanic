@@ -1,6 +1,10 @@
 package com.example.mechanic.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -16,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -72,7 +78,10 @@ public class ProfileFragment extends Fragment {
 
 
     RecyclerView recyclerView_machine;
-   ReviewAdapter reviewAdapter;
+    ReviewAdapter reviewAdapter;
+
+    Button editButton;
+    ConstraintLayout profileLayout, profileEditLayout;
 
     FirebaseAuth auth;
 
@@ -98,6 +107,50 @@ public class ProfileFragment extends Fragment {
         profilePicChange = view.findViewById(R.id.s_change_profile);
         profilePic = view.findViewById(R.id.profilepic);
         s_rating = view.findViewById(R.id.s_rating);
+        editButton = view.findViewById(R.id.edit_button);
+        profileLayout = view.findViewById(R.id.profile_layout);
+        profileEditLayout = view.findViewById(R.id.profile_edit_layout);
+
+//        int distance = 8;
+//        float scale = getActivity().getResources().getDisplayMetrics().density;
+//        view.setCameraDistance(distance * scale);
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Context context = getActivity().getApplicationContext();
+                AnimatorSet flipOut = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_out);
+                AnimatorSet flipIn = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_in);
+                flipIn.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        profileEditLayout.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        profileLayout.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                flipOut.setTarget(profileLayout);
+                flipIn.setTarget(profileEditLayout);
+                flipOut.start();
+                flipIn.start();
+
+
+            }
+        });
 
         dialogBox = new CustomDialogBox(getActivity());
         dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
