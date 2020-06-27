@@ -40,6 +40,8 @@
     <string name="rq6">Q6. How can I approve the ServiceMan\'s work?</string>
     <string name="ra6">Ans- Click on "Pending Approval Request" on home screen and click "Accept" or "Decline" accordingly.</string>
 
+
+    <string name="review_mesg">The Service done by Mechanic is fabulous. He was so polite and responsive to my messages and contacting him was super easy. I Love this App</string>
     <!-- font families -->
     <string name="font_family_light">sans-serif-light</string>
     <string name="font_family_medium">sans-serif-medium</string>

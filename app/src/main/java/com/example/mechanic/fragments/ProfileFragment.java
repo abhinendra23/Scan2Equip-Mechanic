@@ -77,6 +77,8 @@ public class ProfileFragment extends Fragment {
         mTopToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(mTopToolbar);
         setHasOptionsMenu(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         profilePicChange = view.findViewById(R.id.s_change_profile);
         profilePic = view.findViewById(R.id.profilepic);
         s_rating = view.findViewById(R.id.s_rating);
@@ -226,6 +228,7 @@ public class ProfileFragment extends Fragment {
             });
         }
     }
+
 
 
 
