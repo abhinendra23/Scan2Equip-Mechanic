@@ -8,11 +8,11 @@ import java.util.HashMap;
 public class Mechanic implements Cloneable{
 
     private String userName, email, profilePicLink, uid;
-    private int load = 0,numberOfRating;
+    private int load = 0,numberOfRating=0;
     private float overallRating=0;
-    private HashMap<String,Float> rating;
+    private HashMap<String, MechRating> ratings;
     private HashMap<String,Complaint> pendingComplaints, completedComplaints;
-    private HashMap<String,Request> pendingRequests, completedRequests;
+    private HashMap<String,Request> pendingRequest, completedRequest;
 
     public Object clone() throws
             CloneNotSupportedException
@@ -23,18 +23,18 @@ public class Mechanic implements Cloneable{
     public Mechanic() {
     }
 
-    public Mechanic(String userName, String email, String profilePicLink, int load, int numberOfRating, float overallRating, HashMap<String, Float> rating, HashMap<String, Complaint> pendingComplaints, HashMap<String, Complaint> completedComplaints, HashMap<String, Request> pendingRequests, HashMap<String, Request> completedRequests, String uid) {
+    public Mechanic(String userName, String email, String profilePicLink, int load, int numberOfRating, float overallRating, HashMap<String, MechRating> ratings, HashMap<String, Complaint> pendingComplaints, HashMap<String, Complaint> completedComplaints, HashMap<String, Request> pendingRequest, HashMap<String, Request> completedRequest, String uid) {
         this.userName = userName;
         this.email = email;
         this.profilePicLink = profilePicLink;
         this.load = load;
         this.numberOfRating = numberOfRating;
         this.overallRating = overallRating;
-        this.rating = rating;
+        this.ratings = ratings;
         this.pendingComplaints = pendingComplaints;
         this.completedComplaints = completedComplaints;
-        this.pendingRequests = pendingRequests;
-        this.completedRequests = completedRequests;
+        this.pendingRequest = pendingRequest;
+        this.completedRequest = completedRequest;
         this.uid = uid;
     }
 
@@ -86,12 +86,12 @@ public class Mechanic implements Cloneable{
         this.overallRating = overallRating;
     }
 
-    public HashMap<String, Float> getRating() {
-        return rating;
+    public HashMap<String, MechRating> getRating() {
+        return ratings;
     }
 
-    public void setRating(HashMap<String, Float> rating) {
-        this.rating = rating;
+    public void setRating(HashMap<String, MechRating> ratings) {
+        this.ratings = ratings;
     }
 
     public HashMap<String, Complaint> getPendingComplaints() {
@@ -110,20 +110,20 @@ public class Mechanic implements Cloneable{
         this.completedComplaints = completedComplaints;
     }
 
-    public HashMap<String, Request> getPendingRequests() {
-        return pendingRequests;
+    public HashMap<String, Request> getPendingRequest() {
+        return pendingRequest;
     }
 
-    public void setPendingRequests(HashMap<String, Request> pendingRequests) {
-        this.pendingRequests = pendingRequests;
+    public void setPendingRequest(HashMap<String, Request> pendingRequest) {
+        this.pendingRequest = pendingRequest;
     }
 
-    public HashMap<String, Request> getCompletedRequests() {
-        return completedRequests;
+    public HashMap<String, Request> getCompletedRequest() {
+        return completedRequest;
     }
 
-    public void setCompletedRequests(HashMap<String, Request> completedRequests) {
-        this.completedRequests = completedRequests;
+    public void setCompletedRequest(HashMap<String, Request> completedRequest) {
+        this.completedRequest = completedRequest;
     }
 
     public String getUid() {
