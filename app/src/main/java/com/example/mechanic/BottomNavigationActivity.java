@@ -36,7 +36,6 @@ public class BottomNavigationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setIcon(R.drawable.ic_home);
         toolbar.setTitleTextAppearance( this,R.style.TitleTextAppearance);
 
         MeowBottomNavigation bottomNavigation = findViewById(R.id.bottom_bar);
