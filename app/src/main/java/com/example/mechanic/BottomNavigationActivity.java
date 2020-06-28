@@ -3,11 +3,14 @@ package com.example.mechanic;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -28,8 +31,15 @@ public class BottomNavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setOurFragment(new HomeFragment(),1,1);
         setContentView(R.layout.activity_bottom_navigation);
-        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottom_bar);
 
+        final Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setIcon(R.drawable.ic_home);
+        toolbar.setTitleTextAppearance( this,R.style.TitleTextAppearance);
+
+        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottom_bar);
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_history));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_notification1));
@@ -42,18 +52,24 @@ public class BottomNavigationActivity extends AppCompatActivity {
                 switch (item.getId()) {
                     case 1:
                         setOurFragment(new HomeFragment(),old_id,1);
+                        toolbar.setTitle("Home");
+
                         old_id = 1;
                         break;
                     case 2:
                         setOurFragment(new HistoryFragment(),old_id,2);
+                        toolbar.setTitle("History");
                         old_id = 2;
                         break;
                     case 3:
                         setOurFragment(new NotificationFragment(),old_id,3);
+                        toolbar.setTitle("Notifications");
                         old_id = 3;
                         break;
                     case 4:
                         setOurFragment(new ProfileFragment(),old_id,4);
+                        toolbar.setTitle("Profile");
+
                         old_id = 4;
                 }
 
@@ -129,4 +145,23 @@ public class BottomNavigationActivity extends AppCompatActivity {
 //        }
     }
 
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent intent= new Intent(this, SettingActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
 }

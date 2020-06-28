@@ -35,7 +35,7 @@ public class PendingComplaintsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        toolbar.setTitleTextAppearance(this,R.style.TitleTextAppearance);
         recyclerView_complaints = findViewById(R.id.recyclerView_complaints);
         recyclerView_complaints.setLayoutManager(new LinearLayoutManager(this));
 
