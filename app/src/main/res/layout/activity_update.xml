@@ -17,16 +17,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            app:cardBackgroundColor="#DAEDFF"
-            app:cardCornerRadius="5dp"
+            android:layout_marginTop="25dp"
+            app:cardBackgroundColor="@color/list_color_7"
+            app:cardCornerRadius="15dp"
             app:cardElevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -38,6 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:text="Description "
+                    android:fontFamily="@font/imprima"
                     android:layout_marginTop="5dp"
                     android:textColor="#ff646464"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -57,6 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:backgroundTint="#121212"
+                    android:fontFamily="@font/imprima"
                     android:inputType="textMultiLine"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +73,8 @@
                     android:text="What's the Progess"
                     android:textAlignment="center"
                     android:textColor="#646464"
-                    android:textSize="28sp"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/imprima"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -87,6 +90,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:text="Is machine working fine now?"
+                    android:fontFamily="@font/imprima"
                     android:textColor="#ff646464"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -118,6 +122,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_weight="0.6"
                         android:checked="true"
+                        android:fontFamily="@font/imprima"
                         android:text="Yes, Absolutely fine"
                         android:textColor="#121212"
                         android:textSize="15dp" />
@@ -129,6 +134,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Not yet"
+                        android:fontFamily="@font/imprima"
                         android:textColor="#121212"
                         android:textSize="15dp" />
                 </RadioGroup>
@@ -136,19 +142,23 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-
         <Button
             android:id="@+id/submit_update"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:text="Submit"
-            android:textColor="#ffffff"
+            style="@style/profileStyledBackButton"
+
             android:elevation="5dp"
-            android:background="@drawable/update_activity_button"
+             android:layout_marginTop="25dp"
+            android:text="Submit"
+            android:fontFamily="@font/tillana"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
             app:layout_constraintVertical_bias="0.051">
 
@@ -158,31 +168,35 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/tillana"
             android:text="You Support Us\n We are there for You"
             android:textAlignment="center"
-            android:textSize="25sp"
+            android:textColor="#4CAF50"
+            android:textSize="22sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/submit_update"
-            app:layout_constraintVertical_bias="0.118">
+            app:layout_constraintTop_toBottomOf="@+id/gifImageView"
+            app:layout_constraintVertical_bias="0.0">
 
 
         </TextView>
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/gifImageView"
-            android:layout_width="284dp"
-            android:layout_height="275dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:src="@drawable/support"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:layout_constraintVertical_bias="0.673" />
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.017" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
