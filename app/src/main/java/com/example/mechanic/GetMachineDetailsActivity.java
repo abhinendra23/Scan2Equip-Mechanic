@@ -55,8 +55,10 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_get_machine_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        generateComplaint = findViewById(R.id.generateComplaint);
+//        generateComplaint = findViewById(R.id.generateComplaint);
         show_history = findViewById(R.id.show_history);
 
         description = new String("");
@@ -124,9 +126,9 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
         });
 
 
-        generateComplaint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+   //     generateComplaint.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 
 //                complaint = new Complaint();
 //                complaint.setComplaintGenerator(user.getUid());
@@ -144,9 +146,14 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
               //  ComplaintDescriptionDialog complaintDescriptionDialog = new ComplaintDescriptionDialog(GetMachineDetailsActivity.this,complaint,complaintIdValue);
               //  complaintDescriptionDialog.show();
 
-            }
-        });
+//            }
+//        });
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }
