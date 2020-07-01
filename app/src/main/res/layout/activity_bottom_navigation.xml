@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         app:title="Home"
-
         app:menu="@menu/toolbar_menu"
         app:titleMarginStart="50dp"
        >

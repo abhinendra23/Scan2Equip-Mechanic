@@ -112,4 +112,6 @@ dependencies {
    //Custom Switch Button
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
 
+    //sweet toast
+    implementation 'com.github.TheHasnatBD:SweetToast:1.0.2'
 }
