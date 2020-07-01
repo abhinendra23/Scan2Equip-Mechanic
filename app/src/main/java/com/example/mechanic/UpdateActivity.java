@@ -109,9 +109,9 @@ public class UpdateActivity extends AppCompatActivity {
 
                 request.setRequestId(requestIdValue);
 
-                if (status.equals("Pending"))
+                if (status.equals("Not yet"))
                     request.setStatus(false);
-                else if (status.equals("Completed"))
+                else
                     request.setStatus(true);
 
                 Complaint tempComplaint1 = null,tempComplaint2=null;
