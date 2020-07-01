@@ -101,7 +101,7 @@ public class RequestCompletedAdapter extends FirebaseRecyclerPagingAdapter<Reque
 
 //        boolean isExpanded = x.get(position).isExpanded();
         }
-    }
 
+    }
 
 }

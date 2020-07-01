@@ -182,7 +182,11 @@ public class ProfileFragment extends Fragment {
 
                 name.setText(mechanic.getUserName());
                 email.setText(mechanic.getEmail());
-                s_rating.setText(Float.toString(mechanic.getOverallRating()) );
+
+                Float x = mechanic.getOverallRating();
+                double rating = (double)Math.round(x*10d)/10d;
+
+                s_rating.setText(Double.toString(rating));
                 s_rating.setCompoundDrawablesWithIntrinsicBounds(R.drawable.star,0,0,0);
 
 
