@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:text="Forget Password"
             android:textSize="22dp"
+            android:fontFamily="@font/imprima"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
             >
@@ -59,21 +60,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/btn_round_transparent"
+                android:textColor="#5FAF67"
                 android:text="Cancel"
                 />
 
             <Button
                 android:id="@+id/D1I_confirm"
-                android:background="@android:color/transparent"
+                android:background="@drawable/btn_round_corner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center_horizontal"
                 android:text="Confirm"
+                android:backgroundTint="#A1E8A8"
 
-                android:textColor="@android:color/holo_blue_light"
+                android:textColor="#E6000000"
                 />
 
 

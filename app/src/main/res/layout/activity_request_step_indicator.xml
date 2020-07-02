@@ -33,7 +33,9 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:text="Complaint Status"/>
+                android:text="Request Status"
+                android:fontFamily="@font/imprima"
+                />
 
         </LinearLayout>
         <View

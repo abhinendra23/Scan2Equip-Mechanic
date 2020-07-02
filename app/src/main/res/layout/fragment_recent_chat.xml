@@ -5,7 +5,7 @@
     android:layout_height="658dp"
     android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.NotificationFragment">
+    tools:context=".fragments.RecentChatFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:id="@+id/gifImageView"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:src="@drawable/no_notfication"
+            android:src="@drawable/no_message"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -29,16 +29,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/imprima"
-            android:text="Nothing Here"
+            android:text="No Active Chats"
             android:textColor="@color/colorPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/gifImageView"
-            app:layout_constraintVertical_bias="0.645" />
+            app:layout_constraintVertical_bias="0.595" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

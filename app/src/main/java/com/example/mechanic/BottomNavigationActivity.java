@@ -20,6 +20,7 @@ import com.example.mechanic.fragments.HistoryFragment;
 import com.example.mechanic.fragments.HomeFragment;
 import com.example.mechanic.fragments.NotificationFragment;
 import com.example.mechanic.fragments.ProfileFragment;
+import com.example.mechanic.fragments.RecentChatFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavigationActivity extends AppCompatActivity {
@@ -40,9 +41,10 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
         MeowBottomNavigation bottomNavigation = findViewById(R.id.bottom_bar);
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_history));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_notification1));
-        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_account));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_history1));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_chat));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_notification1));
+        bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_account));
 
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
@@ -52,7 +54,6 @@ public class BottomNavigationActivity extends AppCompatActivity {
                     case 1:
                         setOurFragment(new HomeFragment(),old_id,1);
                         toolbar.setTitle("Home");
-
                         old_id = 1;
                         break;
                     case 2:
@@ -61,15 +62,21 @@ public class BottomNavigationActivity extends AppCompatActivity {
                         old_id = 2;
                         break;
                     case 3:
-                        setOurFragment(new NotificationFragment(),old_id,3);
-                        toolbar.setTitle("Notifications");
+                        setOurFragment(new RecentChatFragment(),old_id,3);
+                        toolbar.setTitle("Recent Chats");
                         old_id = 3;
                         break;
                     case 4:
-                        setOurFragment(new ProfileFragment(),old_id,4);
-                        toolbar.setTitle("Profile");
-
+                        setOurFragment(new NotificationFragment(),old_id,4);
+                        toolbar.setTitle("Notifications");
                         old_id = 4;
+                        break;
+                    case 5:
+                        setOurFragment(new ProfileFragment(),old_id,5);
+                        toolbar.setTitle("Profile");
+                        old_id=5;
+                        break;
+
                 }
 
             }
