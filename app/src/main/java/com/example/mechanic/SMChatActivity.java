@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,7 @@ public class SMChatActivity extends AppCompatActivity {
     FirebaseUser fuser;
     DatabaseReference reference;
 
-    ImageButton btn_send;
+    ImageView btn_send;
     EditText text_send;
 
     ChatAdapter chatAdapter;
@@ -118,13 +119,13 @@ public class SMChatActivity extends AppCompatActivity {
                 username.setText(user.getUserName());
 
                 if (true){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
+                    profile_image.setImageResource(R.drawable.profilepicdemo);
                 } else {
                     //and this
                     //Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
                 }
 
-                readMesagges(fuser.getUid(), userid, "R.mipmap.ic_launcher");
+                readMesagges(fuser.getUid(), userid, "R.drawable.profilepicdemo");
             }
 
             @Override
