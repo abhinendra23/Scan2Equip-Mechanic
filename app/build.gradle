@@ -68,7 +68,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0@aar'
 
     // Facebook Shimmer Effect
-    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     // circular imageview
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
