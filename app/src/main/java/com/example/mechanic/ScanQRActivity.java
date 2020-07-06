@@ -274,6 +274,7 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
             flash_ON = 0;
             flashlight1.setImageResource(R.drawable.ic_flash_on_black_24dp);
             scannerView.setFlash(false);
+
         }
     }
 

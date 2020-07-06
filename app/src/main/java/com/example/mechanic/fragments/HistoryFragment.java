@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +36,7 @@ public class HistoryFragment extends Fragment {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference complaintReference, responsibleManReference, pendingComplaintListReference;
-
+    LinearLayout nothing;
 
     List<Complaint> completedComplaintObjectList;
     public HistoryFragment() {
@@ -49,6 +50,7 @@ public class HistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.history_fragment, container, false);
         recyclerView = rootView.findViewById(R.id.historyFragmentRecyclerView);
+        nothing = rootView.findViewById(R.id.EmptyList3);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         auth = FirebaseAuth.getInstance();
@@ -59,9 +61,28 @@ public class HistoryFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         firebaseDatabase =  FirebaseDatabase.getInstance();
-        responsibleManReference = firebaseDatabase.getReference("Users").child("ServiceMan").child(user.getUid());
-        pendingComplaintListReference = responsibleManReference.child("completedComplaintList");
+        responsibleManReference = firebaseDatabase.getReference("Users").child("Mechanic").child(user.getUid());
+        pendingComplaintListReference = responsibleManReference.child("completedComplaints");
         complaintReference = firebaseDatabase.getReference("Complaints");
+
+        DatabaseReference reference1 = responsibleManReference;
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists())
+                {
+                    nothing.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         pendingComplaintListReference.addChildEventListener(new ChildEventListener() {
             @Override
