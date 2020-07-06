@@ -8,7 +8,7 @@ public class PastRecord {
     String description;
     boolean done;
     boolean expanded;
-    long complaintId;
+    String complaintId;
 
 
     public boolean isExpanded() {
@@ -64,11 +64,11 @@ public class PastRecord {
         this.done = done;
     }
 
-    public long getComplaintId() {
+    public String getComplaintId() {
         return complaintId;
     }
 
-    public void setComplaintId(long complaintId) {
+    public void setComplaintId(String complaintId) {
         this.complaintId = complaintId;
     }
 }
