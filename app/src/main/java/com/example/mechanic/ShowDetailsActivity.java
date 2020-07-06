@@ -92,15 +92,15 @@ public class ShowDetailsActivity extends AppCompatActivity {
 
                         Log.i("History","something1 ");
 
-//                        PastRecord pastRecord = new PastRecord();
-//                        Request request= dataSnapshot.getValue(Request.class);
-//                        pastRecord.setDescription(request.getDescription());
-//                        pastRecord.setServiceMan(request.getComplaint().getMechanic().getUserName());
-//                        pastRecord.setComplaintId(request.getComplaint().getComplaintId());
-//                        //shimmerFrameLayout.stopShimmerAnimation();
-//                        //shimmerFrameLayout.setVisibility(View.INVISIBLE);
-//                        pastRecords.add(pastRecord);
-//                        showDetailsAdapter.notifyDataSetChanged();
+                        PastRecord pastRecord = new PastRecord();
+                        Request request= dataSnapshot.getValue(Request.class);
+                        pastRecord.setDescription(request.getDescription());
+                        pastRecord.setServiceMan(request.getComplaint().getMechanic().getUserName());
+                        pastRecord.setComplaintId(request.getComplaint().getComplaintId());
+                        //shimmerFrameLayout.stopShimmerAnimation();
+                        //shimmerFrameLayout.setVisibility(View.INVISIBLE);
+                        pastRecords.add(pastRecord);
+                        showDetailsAdapter.notifyDataSetChanged();
                     }
 
                     @Override

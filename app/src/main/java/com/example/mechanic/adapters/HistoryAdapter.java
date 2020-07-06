@@ -43,7 +43,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyHolder
         myholder1.cardview.setCardBackgroundColor(bgColor);
         myholder1.pendingComplaintDate.setText(x.get(position).getGeneratedDate());
         myholder1.pendingComplaintDescription.setText(x.get(position).getDescription());
-        myholder1.pendingComplaintId.setText((int) x.get(position).getComplaintId());
+        myholder1.pendingComplaintId.setText(String.valueOf(x.get(position).getComplaintId()));
         myholder1.pendingComplaintMachineId.setText(x.get(position).getMachine().getMachineId());
 
     }

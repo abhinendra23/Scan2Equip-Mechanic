@@ -33,6 +33,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import xyz.hasnat.sweettoast.SweetToast;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText loginEmail, loginPassword;
@@ -127,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                                         if(isManager)
                                         {
                                             customDialogBox.dismiss();
+                                            SweetToast.success(getApplicationContext(),"Login Successfully");
                                             Intent i = new Intent(LoginActivity.this,BottomNavigationActivity.class);
                                             startActivity(i);
                                             finish();
@@ -134,13 +137,14 @@ public class LoginActivity extends AppCompatActivity {
                                         else
                                         {
                                             customDialogBox.dismiss();
-                                            Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
+                                            SweetToast.error(getApplicationContext(),"You Entered wrong Id or password");
                                         }
+
                                     }
                                     catch (Exception e)
                                     {
                                         customDialogBox.dismiss();
-                                        Toast.makeText(LoginActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
+                                        SweetToast.error(getApplicationContext(),"Error");
                                     }
 
                                 }
@@ -148,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         } else {
                             customDialogBox.dismiss();
-                            Toast.makeText(getApplicationContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                            SweetToast.error(getApplicationContext(),"You Entered wrong Id or password");
 
                         }
                     }

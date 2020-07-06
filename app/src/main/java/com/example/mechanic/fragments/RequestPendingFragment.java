@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -36,7 +38,7 @@ public class RequestPendingFragment extends Fragment {
 
     RecyclerView s_recyclerView_pending_request;
     RequestPendingAdapter requestPendingAdapter;
-
+    LinearLayout nothing;
     FirebaseDatabase firebaseDatabase;
 
     FirebaseAuth auth;
@@ -59,6 +61,7 @@ public class RequestPendingFragment extends Fragment {
 
 
         s_recyclerView_pending_request = (RecyclerView)rootView.findViewById(R.id.s_recyclerView_pending_request);
+        nothing = rootView.findViewById(R.id.EmptyList1);
         s_recyclerView_pending_request.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 //        dialogBox = new CustomDialogBox(getActivity());
@@ -70,6 +73,25 @@ public class RequestPendingFragment extends Fragment {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         Query baseQuery = firebaseDatabase.getReference("Users").child("Mechanic").child(user.getUid()).child("pendingRequests");
+
+        DatabaseReference reference1 = firebaseDatabase.getReference().child("Users").child("Mechanic").child(user.getUid()).child("pendingRequests");
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists())
+                {
+                    nothing.setVisibility(View.VISIBLE);
+                    s_recyclerView_pending_request.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)

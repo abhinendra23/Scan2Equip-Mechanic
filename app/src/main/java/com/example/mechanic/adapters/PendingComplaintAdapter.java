@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mechanic.R;
+import com.example.mechanic.RequestStepIndicator;
 import com.example.mechanic.SMChatActivity;
 import com.example.mechanic.UpdateActivity;
 import com.example.mechanic.model.Complaint;
@@ -195,18 +196,15 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
                 @Override
                 public void onClick(View view) {
 
+
+
 //                    DataSnapshot dataSnapshot = getItem(getAdapterPosition());
+//                    Complaint complaint = null;
 //                    if (dataSnapshot != null) {
-//                        Complaint complaint = dataSnapshot.getValue(Complaint.class);
-//
+//                        complaint = dataSnapshot.getValue(Complaint.class);
 //                    }
-//
-//
-//
-//                    Intent intent = new Intent(c, RMRequestStepIndicator.class);
-//                    intent.putExtra("status", complaint.getStatus());
-//                    intent.putExtra("generated date", complaint.getComplaintGeneratedDate());
-//                    intent.putExtra("serviceman", complaint.getServicemanName());
+//                    Intent intent = new Intent(c, RequestStepIndicator.class);
+//                    intent.putExtra("complaint", Parcels.wrap(complaint));
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    c.getApplicationContext().startActivity(intent);
                 }

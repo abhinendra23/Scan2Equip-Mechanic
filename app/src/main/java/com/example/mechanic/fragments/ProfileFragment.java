@@ -103,11 +103,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        mTopToolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mTopToolbar);
-        setHasOptionsMenu(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         profilePicChange = view.findViewById(R.id.s_change_profile);
         profilePic = view.findViewById(R.id.profilepic);
         s_rating = view.findViewById(R.id.s_rating);
@@ -186,7 +182,11 @@ public class ProfileFragment extends Fragment {
 
                 name.setText(mechanic.getUserName());
                 email.setText(mechanic.getEmail());
-                s_rating.setText(Float.toString(mechanic.getOverallRating()) );
+
+                Float x = mechanic.getOverallRating();
+                double rating = (double)Math.round(x*10d)/10d;
+
+                s_rating.setText(Double.toString(rating));
                 s_rating.setCompoundDrawablesWithIntrinsicBounds(R.drawable.star,0,0,0);
 
 
@@ -282,23 +282,6 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle item selection
-        switch (item.getItemId()) {
-            case R.id.settings:
-                Intent intent= new Intent(getActivity().getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

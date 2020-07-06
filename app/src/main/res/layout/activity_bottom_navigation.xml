@@ -8,7 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".BottomNavigationActivity"
     >
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:title="Home"
+        app:menu="@menu/toolbar_menu"
+        app:titleMarginStart="50dp"
+       >
+    </androidx.appcompat.widget.Toolbar>
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
@@ -29,6 +37,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="658dp"
+        android:layout_marginTop="40dp"
         android:layout_above="@+id/bottom_bar"
         >
 
