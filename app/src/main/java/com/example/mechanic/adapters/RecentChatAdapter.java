@@ -101,7 +101,9 @@ public class RecentChatAdapter extends FirebaseRecyclerPagingAdapter<Complaint, 
         public void bind(final Complaint model) {
 
             if (getItemCount() == 0) {
-                // do empty view thing.
+
+
+
             } else {
                 complaintid = String.valueOf(model.getComplaintId());
                 complaintId.setText(complaintid);

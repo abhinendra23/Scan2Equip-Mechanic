@@ -3,6 +3,8 @@ package com.example.mechanic;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -17,12 +19,14 @@ import com.example.mechanic.adapters.ShowDetailsAdapter;
 import com.example.mechanic.model.PastRecord;
 import com.example.mechanic.model.Request;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -48,22 +52,28 @@ public class ShowDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_details);
 
+        final Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_machine_type);
+        toolbar.setTitleTextAppearance(this,R.style.TitleTextAppearance);
+
 
         generationCode = getIntent().getStringExtra("generationCode");
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        historyReference = firebaseDatabase.getReference("machines").child(generationCode).child("pastRecords");
 
-        floatingActionButton = findViewById(R.id.btn_float);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        historyReference = firebaseDatabase.getReference("Machines").child(generationCode).child("pastRecords");
+
+
         recyclerView = findViewById(R.id.RecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // shimmerFrameLayout = findViewById(R.id.shimmerFrameLayout);
         // shimmerFrameLayout.startShimmerAnimation();
-
-        pastRecords = new ArrayList<>();
-        showDetailsAdapter = new ShowDetailsAdapter(getApplicationContext(),pastRecords);
-        recyclerView.setAdapter(showDetailsAdapter);
 
         swipeRefereshLayout = findViewById(R.id.swipeRefreshLayout);
 
@@ -77,69 +87,22 @@ public class ShowDetailsActivity extends AppCompatActivity {
             }
         });
 
+        Query baseQuery = firebaseDatabase.getReference("Machines").child(generationCode).child("pastRecords");
 
-        historyReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(10)
+                .setPageSize(20)
+                .build();
 
-                String request = dataSnapshot.getKey();
+        DatabasePagingOptions<PastRecord> options = new DatabasePagingOptions.Builder<PastRecord>()
+                .setLifecycleOwner(this)
+                .setQuery(baseQuery,config,PastRecord.class)
+                .build();
 
-                Log.i("History","something");
-                DatabaseReference requestRefernce = FirebaseDatabase.getInstance().getReference("Requests").child(request);
-                requestRefernce.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        showDetailsAdapter = new ShowDetailsAdapter(options, ShowDetailsActivity.this);
+        recyclerView.setAdapter(showDetailsAdapter);
+        showDetailsAdapter.startListening();
 
-                        Log.i("History","something1 ");
-
-                        PastRecord pastRecord = new PastRecord();
-                        Request request= dataSnapshot.getValue(Request.class);
-                        pastRecord.setDescription(request.getDescription());
-                        pastRecord.setServiceMan(request.getComplaint().getMechanic().getUserName());
-                        pastRecord.setComplaintId(request.getComplaint().getComplaintId());
-                        //shimmerFrameLayout.stopShimmerAnimation();
-                        //shimmerFrameLayout.setVisibility(View.INVISIBLE);
-                        pastRecords.add(pastRecord);
-                        showDetailsAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ShowDetailsActivity.this, UpdateActivity.class);
-                startActivity(i);
-                finish();
-
-            }
-        });
     }
 }
