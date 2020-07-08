@@ -114,19 +114,23 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
 
-                            SharedPreferences sharedPref = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-                            String token = sharedPref.getString("token", "null");
-                            FirebaseDatabase.getInstance().getReference("tokens/" +
-                                    mAuth.getCurrentUser().getUid()).setValue(token);
+                            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                                @Override
+                                public void onSuccess(InstanceIdResult instanceIdResult) {
+                                    String newToken = instanceIdResult.getToken();
+                                    FirebaseDatabase.getInstance().getReference("tokens/" +
+                                            mAuth.getCurrentUser().getUid()).setValue(newToken);
+
+                                }
+                            });
 
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             user.getIdToken(true).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
                                 @Override
                                 public void onSuccess(GetTokenResult getTokenResult) {
                                     try {
-                                        boolean isManager = (boolean) getTokenResult.getClaims().get("mechanic");
-                                        if(isManager)
+                                        boolean isMechanic = (boolean) getTokenResult.getClaims().get("mechanic");
+                                        if(isMechanic)
                                         {
                                             customDialogBox.dismiss();
                                             SweetToast.success(getApplicationContext(),"Login Successfully");
