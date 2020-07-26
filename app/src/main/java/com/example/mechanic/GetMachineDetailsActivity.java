@@ -7,21 +7,32 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mechanic.adapters.ShowDetailsAdapter;
+import com.example.mechanic.adapters.ShowHistoryDetailsAdapter;
 import com.example.mechanic.model.Complaint;
 import com.example.mechanic.model.Machine;
+import com.example.mechanic.model.PastRecord;
+import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -35,17 +46,26 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
 
     String generationCode;
     Machine machine;
+    ShowHistoryDetailsAdapter showHistoryDetailsAdapter;
 
     ImageView QRCodeImage;
     Button show_history;
     Button generateComplaint;
 
-    TextView serialNo,department,serviceTime,dateOfInstallation, generator;
+    String machineId;
 
     Complaint complaint;
 
     String complaintIdValue;
     String description;
+
+    TextView company_name;
+    TextView type,machineModelNumber,price,machineDetailsDepartment, machineDetailsServiceTime,machineDetailsInstallationDate,generator_name;
+    TextView machineDetailsSerialNo;
+    RecyclerView recyclerView;
+    LinearLayoutManager HorizontalLayout;
+    ScrollView ScrollViewHistory;
+    TextView NoMachineHistory;
 
 
 
@@ -58,16 +78,25 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//        generateComplaint = findViewById(R.id.generateComplaint);
+
+        machineModelNumber = findViewById(R.id.machineModelNumber);
+        price = findViewById(R.id.price);
+        machineDetailsServiceTime = findViewById(R.id.machineDetailsServiceTime);
+        machineDetailsInstallationDate = findViewById(R.id.machineDetailsInstallationDate);
+        generator_name = findViewById(R.id.generator_name);
+        machineDetailsSerialNo = findViewById(R.id.machineDetailsSerialNo);
+        company_name = findViewById(R.id.company_name);
+        type = findViewById(R.id.machine_type);
+        machineDetailsDepartment = findViewById(R.id.machineDetailsDepartment);
         show_history = findViewById(R.id.show_history);
+        ScrollViewHistory = findViewById(R.id.scrollViewHistory);
+        NoMachineHistory = findViewById(R.id.xyz1);
+
+
+
 
         description = new String("");
 
-        serialNo = findViewById(R.id.machineDetailsSerialNo);
-        department = findViewById(R.id.machineDetailsDepartment);
-        serviceTime = findViewById(R.id.machineDetailsServiceTime);
-        dateOfInstallation = findViewById(R.id.machineDetailsInstallationDate);
-        generator = findViewById(R.id.generator_name);
 
         generationCode = getIntent().getStringExtra("generationCode");
 
@@ -81,7 +110,7 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
         //responsibleReference = firebaseDatabase.getReference("Users").child("Manager").child(user.getUid());
         complaintReference = firebaseDatabase.getReference("Complaints");
 
-        QRCodeImage = findViewById(R.id.QrCodeImage);
+
 
         machineReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,27 +119,21 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
                 machine = dataSnapshot.getValue(Machine.class);
                 //Toast.makeText(GetMachineDetailsActivity.this, machine.getDepartment(), Toast.LENGTH_SHORT).show();
 
-                serialNo.setText(machine.getSerialNumber());
-                department.setText(machine.getDepartment());
-                serviceTime.setText(machine.getServiceTime()+" months");
-                dateOfInstallation.setText(machine.getDateOfInstallation());
-                generator.setText(machine.getManager().getUserName());
+                machineDetailsSerialNo.setText(machine.getSerialNumber());
+                machineDetailsDepartment.setText(machine.getDepartment());
+                machineDetailsServiceTime.setText(machine.getServiceTime()+" months");
+                machineDetailsInstallationDate.setText(machine.getDateOfInstallation());
+                generator_name.setText(machine.getManager().getUserName());
+                company_name.setText(machine.getCompany());
+                price.setText(String.valueOf(machine.getPrice()));
+                type.setText(machine.getType());
+                machineModelNumber.setText(machine.getModelNumber());
+                machineId = machine.getMachineId();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
-
-        show_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(GetMachineDetailsActivity.this, ShowDetailsActivity.class);
-                i.putExtra("generationCode",generationCode);
-                startActivity(i);
-                finish();
             }
         });
 
@@ -125,29 +148,60 @@ public class GetMachineDetailsActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView=findViewById(R.id.machine_history_rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-   //     generateComplaint.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        HorizontalLayout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(HorizontalLayout);
 
-//                complaint = new Complaint();
-//                complaint.setComplaintGenerator(user.getUid());
-//                complaint.setComplaintMachineId(generationCode);
-//                Calendar cal = Calendar.getInstance();
-//                int year = cal.get(Calendar.YEAR);
-//                int month = cal.get(Calendar.MONTH);
-//                month = month+1;
-//                int day = cal.get(Calendar.DAY_OF_MONTH);
-//
-//
-//                complaint.setComplaintGeneratedDate(day+"/"+month+"/"+year);
-//                complaint.setStatus(complaint.getGeneratedOnly());
+        Query baseQuery1 = firebaseDatabase.getReference("Machines").child(generationCode).child("pastRecords");
 
-              //  ComplaintDescriptionDialog complaintDescriptionDialog = new ComplaintDescriptionDialog(GetMachineDetailsActivity.this,complaint,complaintIdValue);
-              //  complaintDescriptionDialog.show();
+        DatabaseReference reference1 = firebaseDatabase.getReference().child("Machines").child(generationCode).child("pastRecords");
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists())
+                {
+                    show_history.setVisibility(View.GONE);
+                    ScrollViewHistory.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    NoMachineHistory.setVisibility(View.VISIBLE);
+                }
+            }
 
-//            }
-//        });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(10)
+                .setPageSize(20)
+                .build();
+
+        DatabasePagingOptions<PastRecord> options = new DatabasePagingOptions.Builder<PastRecord>()
+                .setLifecycleOwner(this)
+                .setQuery(baseQuery1, config, PastRecord.class)
+                .build();
+
+        showHistoryDetailsAdapter = new ShowHistoryDetailsAdapter(options, GetMachineDetailsActivity.this);
+        recyclerView.setAdapter(showHistoryDetailsAdapter);
+        showHistoryDetailsAdapter.startListening();
+
+
+
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GetMachineDetailsActivity.this, ShowDetailsActivity.class);
+                i.putExtra("generationCode",generationCode);
+                startActivity(i);
+            }
+        });
+
+
 
     }
     @Override
