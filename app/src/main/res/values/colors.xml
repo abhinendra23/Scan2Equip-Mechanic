@@ -19,6 +19,7 @@
     <color name="bkcolor">#EAEAEA</color>
 
 
+    <color name="map_nav_color">#30962F</color>
     <!-- colors for button style -->
 
     <color name="gradient_start_color">#4c84ff</color>

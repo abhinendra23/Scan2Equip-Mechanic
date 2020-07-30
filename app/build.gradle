@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.mechanic"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -17,6 +17,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -133,4 +137,8 @@ dependencies {
 
     // expandable layout for register
     implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
+
+    //Mapbox Navigation
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.42.6'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.6'
 }

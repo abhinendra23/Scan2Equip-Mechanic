@@ -1,6 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Mechanic</string>
 
+    <string name="mapbox_access_token">sk.eyJ1IjoiYWJoaW5lbmRyYWciLCJhIjoiY2tkOGZvOGRpMGNpMzJ4cGNydW1ocnlwaiJ9.SiN65X1mLwmy_ZOaNrPZ-w</string>
+    <string name="navigation_guidance_day" translatable="false">mapbox://styles/mapbox/navigation-guidance-day-v4</string>
+    <string name="tracking_enabled">Tracking Enabled</string>
+    <string name="tracking_already_enabled">Already Tracking enabled</string>
+
+
+
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
 

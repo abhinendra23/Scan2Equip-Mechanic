@@ -18,11 +18,13 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mechanic.ManagerProfileActivity;
 import com.example.mechanic.R;
 import com.example.mechanic.RequestStepIndicator;
 import com.example.mechanic.SMChatActivity;
 import com.example.mechanic.UpdateActivity;
 import com.example.mechanic.model.Complaint;
+import com.example.mechanic.model.Manager;
 import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
 import com.firebase.ui.database.paging.LoadingState;
@@ -31,10 +33,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Complaint,PendingComplaintAdapter.MyHolder> {
 
@@ -85,6 +90,7 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
         LinearLayout ll_hide;
         Button updateButton ,chatButton, statusButton;
         ImageView expand;
+        CircularImageView managerPic;
 
         public MyHolder(@NonNull final View itemView)
         {
@@ -102,6 +108,29 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
             cardView = itemView.findViewById(R.id.cardview12);
             ll_hide = itemView.findViewById(R.id.ll_hide12);
             ll_hide.setVisibility(View.GONE);
+            managerPic = itemView.findViewById(R.id.manager_img);
+
+            managerPic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    DataSnapshot dataSnapshot = getItem(getAdapterPosition());
+                    Manager manager = null;
+                    Complaint complaint = null;
+                    if (dataSnapshot != null) {
+                        complaint = dataSnapshot.getValue(Complaint.class);
+                        manager = complaint.getManager();
+                    }
+                    if(manager!=null && manager.getUserName()!=null) {
+                        Intent intent = new Intent(c, ManagerProfileActivity.class);
+                        intent.putExtra("manager", Parcels.wrap(manager));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        c.getApplicationContext().startActivity(intent);
+                    }
+                }
+            });
+
+
 //            public void onClick()
 //            {
 //

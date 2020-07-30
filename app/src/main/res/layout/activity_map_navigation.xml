@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.MapNavigationActivity">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mapView"
+        mapbox:mapbox_cameraTargetLat ="37.7749"
+        mapbox:mapbox_cameraTargetLng ="-122.4194"
+        mapbox:mapbox_cameraZoom ="12"
+        >
+
+
+    </com.mapbox.mapboxsdk.maps.MapView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#fff"
+        android:id="@+id/current_location"
+        android:src="@drawable/leku_ic_gps_lime"
+        android:outlineSpotShadowColor="#fff"
+        android:outlineAmbientShadowColor="#fff"
+        mapbox:rippleColor="#fff"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        mapbox:layout_constraintBottom_toTopOf="@+id/button"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="#a3a3a3"
+        android:enabled="false"
+        android:text="Start Navigation"
+        android:textColor="#fff"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
