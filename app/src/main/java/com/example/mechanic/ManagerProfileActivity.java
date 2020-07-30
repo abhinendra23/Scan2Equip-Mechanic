@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.MapNavigationActivity;
+import com.example.mechanic.model.Complaint;
 import com.example.mechanic.model.Manager;
 
 import org.parceler.Parcels;
@@ -20,11 +21,13 @@ public class ManagerProfileActivity extends AppCompatActivity {
     ImageView profilepic;
     TextView managerName,managerEmail,managerPhone,managerDepartment;
     LinearLayout chat,navigation;
+    Complaint complaint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_profile);
         final Manager manager = Parcels.unwrap(getIntent().getParcelableExtra("manager"));
+        complaint = Parcels.unwrap(getIntent().getParcelableExtra("complaint"));
         profilepic = findViewById(R.id.circleImageView);
         managerName = findViewById(R.id.manager_name);
         managerEmail = findViewById(R.id.manager_email);
@@ -48,6 +51,11 @@ public class ManagerProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(ManagerProfileActivity.this, SMChatActivity.class);
+                intent.putExtra("userid", complaint.getManager().getUid());
+                intent.putExtra("complaintId", String.valueOf(complaint.getComplaintId()));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
             }
         });
         navigation.setOnClickListener(new View.OnClickListener() {

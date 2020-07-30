@@ -121,9 +121,10 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
                         complaint = dataSnapshot.getValue(Complaint.class);
                         manager = complaint.getManager();
                     }
-                    if(manager!=null && manager.getUserName()!=null) {
+                    if(manager!=null && manager.getUserName()!=null && complaint != null) {
                         Intent intent = new Intent(c, ManagerProfileActivity.class);
                         intent.putExtra("manager", Parcels.wrap(manager));
+                        intent.putExtra("complaint",Parcels.wrap(complaint));
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         c.getApplicationContext().startActivity(intent);
                     }
