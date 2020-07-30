@@ -61,44 +61,92 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Map<String, String> data = remoteMessage.getData();
 
-        String subject,message;
-        subject = data.get("subject").toString();
-        message = data.get("message").toString();
+        Log.d("received message", String.valueOf(remoteMessage));
+        String type;
+        type = data.get("type").toString();
+        if(type.equals("broadcast")){
 
-        Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
+            String subject,message;
+            subject = data.get("subject").toString();
+            message = data.get("message").toString();
 
-        NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+            Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
 
-        NotificationChannel channel = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            AudioAttributes att = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                    .build();
+            NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
 
-            channel = new NotificationChannel("222", "my_channel", NotificationManager.IMPORTANCE_HIGH);
-            nm.createNotificationChannel(channel);
+            NotificationChannel channel = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                AudioAttributes att = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                        .build();
+
+                channel = new NotificationChannel("222", "my_channel", NotificationManager.IMPORTANCE_HIGH);
+                nm.createNotificationChannel(channel);
+            }
+
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(getApplicationContext(), "222")
+                            .setContentTitle(subject)
+                            .setAutoCancel(true)
+                            //                        .setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.lmis_logo)).getBitmap())
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .setSummaryText("Mechanic")
+                                    .setBigContentTitle(subject)
+                                    .bigText(message))
+
+                            //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
+                            .setContentText(message)
+                            .setColor(Color.BLUE)
+                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                            .setContentIntent(pi);
+
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+            nm.notify(101, builder.build());
         }
+        else if(type.equals("generateComplaintMessage")){
+            String serviceType,description,instruction;
+            serviceType = data.get("serviceType").toString();
+            description = data.get("description").toString();
+            instruction = data.get("instruction").toString();
 
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(getApplicationContext(), "222")
-                        .setContentTitle(subject)
-                        .setAutoCancel(true)
-//                        .setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.lmis_logo)).getBitmap())
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .setSummaryText("Mechanic")
-                                .setBigContentTitle(subject)
-                                .bigText(message))
+            Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
 
-                        //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
-                        .setContentText(message)
-                        .setColor(Color.BLUE)
-                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                        .setContentIntent(pi);
+            NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
 
-        builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-        nm.notify(101, builder.build());
+            NotificationChannel channel = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                AudioAttributes att = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                        .build();
+
+                channel = new NotificationChannel("222", "my_channel", NotificationManager.IMPORTANCE_HIGH);
+                nm.createNotificationChannel(channel);
+            }
+
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(getApplicationContext(), "222")
+                            .setContentTitle(serviceType)
+                            .setAutoCancel(true)
+                            //                        .setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.lmis_logo)).getBitmap())
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .setSummaryText("Mechanic")
+                                    .setBigContentTitle(serviceType)
+                                    .bigText(description))
+
+                            //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
+                            .setContentText(instruction)
+                            .setColor(Color.BLUE)
+                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                            .setContentIntent(pi);
+
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+            nm.notify(101, builder.build());
+        }
     }
 }
