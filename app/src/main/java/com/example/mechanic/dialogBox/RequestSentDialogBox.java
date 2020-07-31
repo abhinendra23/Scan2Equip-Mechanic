@@ -1,5 +1,6 @@
 package com.example.mechanic.dialogBox;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,9 +17,12 @@ public class RequestSentDialogBox extends Dialog implements View.OnClickListener
 
     ImageView cancel;
     Button okayButton;
+    Button update;
 
-    public RequestSentDialogBox(@NonNull Context context) {
-        super(context);
+    public RequestSentDialogBox(Activity a) {
+        super(a);
+        update = a.findViewById(R.id.submit_update);
+        this.setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -31,6 +35,8 @@ public class RequestSentDialogBox extends Dialog implements View.OnClickListener
         okayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                update.setText("Request Updated");
+                update.setEnabled(false);
                 dismiss();
             }
         });
@@ -38,6 +44,8 @@ public class RequestSentDialogBox extends Dialog implements View.OnClickListener
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                update.setText("Request Updated");
+                update.setEnabled(false);
                 dismiss();
             }
         });

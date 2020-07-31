@@ -92,6 +92,8 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
         ImageView expand;
         CircularImageView managerPic;
 
+
+
         public MyHolder(@NonNull final View itemView)
         {
             super(itemView);
@@ -109,6 +111,8 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
             ll_hide = itemView.findViewById(R.id.ll_hide12);
             ll_hide.setVisibility(View.GONE);
             managerPic = itemView.findViewById(R.id.manager_img);
+
+
 
             managerPic.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -160,6 +164,7 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
                 }
             });
 
+
             updateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -197,8 +202,6 @@ public class PendingComplaintAdapter extends FirebaseRecyclerPagingAdapter<Compl
 
                         }
                     });
-
-
 
 
                 }

@@ -48,6 +48,7 @@ public class UpdateActivity extends AppCompatActivity {
     RadioGroup radio_group;
     RadioButton radioButton;
     String status;
+    Complaint complaint;
 
     Button submit_update;
 
@@ -83,6 +84,17 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
 
+        complaint = Parcels.unwrap(getIntent().getParcelableExtra("complaint"));
+
+        if(complaint.getStatus()==3)
+        {
+            submit_update.setText("Already updated");
+            submit_update.setEnabled(false);
+        }
+        else
+        {
+            submit_update.setEnabled(true);
+        }
 
         submit_update.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -91,8 +103,6 @@ public class UpdateActivity extends AppCompatActivity {
                 RequestSentDialogBox requestSentDialogBox = new RequestSentDialogBox(UpdateActivity.this);
                 requestSentDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 requestSentDialogBox.show();
-
-                Complaint complaint = Parcels.unwrap(getIntent().getParcelableExtra("complaint"));
 
                 int selectedId = radio_group.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
