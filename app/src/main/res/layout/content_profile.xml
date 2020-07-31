@@ -6,23 +6,135 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:showIn="@layout/fragment_profile"
-    android:layout_marginTop="300dp"
+
     android:orientation="vertical"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#275F73"
+            android:text="PERSONAL DETAILS :"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/imprima"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        <View style="@style/DetailsView"
+            android:background="#F0DBDB"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_identity"
+                android:padding="6dp"
+                android:layout_marginLeft="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="15dp"
+                    android:text="Staff No:"
+                    android:textColor="#777575"
+                    android:fontFamily="@font/imprima"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:layout_marginTop="3dp"
+                    android:id="@+id/employee_id"
+                    android:text="144785496"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/imprima"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_department"
+                android:padding="6dp"
+                android:layout_marginLeft="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="15dp"
+                    android:text="Department:"
+                    android:textColor="#777575"
+                    android:fontFamily="@font/imprima"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:id="@+id/employee_department"
+                    android:text="Custom Excise"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/imprima"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Reviews:-"
-        android:textStyle="bold"
+        android:text="REVIEWS:-"
         android:fontFamily="@font/imprima"
-        android:textSize="18sp"
-        android:textColor="#0087E1"
-        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:textColor="#275F73"
+        android:layout_marginLeft="20dp"
         />
+        <View style="@style/DetailsView"
+            android:background="#F0DBDB"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/horizontal_rv"
         />
+</LinearLayout>
 </LinearLayout>

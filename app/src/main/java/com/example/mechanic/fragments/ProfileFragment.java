@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mechanic.CircleTransform;
+import com.example.mechanic.EditProfileActivity;
 import com.example.mechanic.R;
 import com.example.mechanic.SettingActivity;
 import com.example.mechanic.adapters.ReviewAdapter;
@@ -49,6 +50,7 @@ import com.example.mechanic.model.Request;
 import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -84,7 +86,7 @@ public class ProfileFragment extends Fragment {
     RecyclerView recyclerView_machine;
     ReviewAdapter reviewAdapter;
 
-    Button editButton;
+    FloatingActionButton editButton;
     ConstraintLayout profileLayout, profileEditLayout;
 
     FirebaseAuth auth;
@@ -126,34 +128,36 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Context context = getActivity().getApplicationContext();
-                AnimatorSet flipOut = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_out);
-                AnimatorSet flipIn = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_in);
-                flipIn.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        profileEditLayout.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        profileLayout.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-                flipOut.setTarget(profileLayout);
-                flipIn.setTarget(profileEditLayout);
-                flipOut.start();
-                flipIn.start();
+                Intent intent = new Intent(getActivity().getApplicationContext(), EditProfileActivity.class);
+                startActivity(intent);
+//                Context context = getActivity().getApplicationContext();
+//                AnimatorSet flipOut = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_out);
+//                AnimatorSet flipIn = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_in);
+//                flipIn.addListener(new Animator.AnimatorListener() {
+//                    @Override
+//                    public void onAnimationStart(Animator animation) {
+//                        profileEditLayout.setVisibility(View.VISIBLE);
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        profileLayout.setVisibility(View.GONE);
+//                    }
+//
+//                    @Override
+//                    public void onAnimationCancel(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animator animation) {
+//
+//                    }
+//                });
+//                flipOut.setTarget(profileLayout);
+//                flipIn.setTarget(profileEditLayout);
+//                flipOut.start();
+//                flipIn.start();
 
 
             }

@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/rating_bar"
             style="@style/Widget.AppCompat.RatingBar.Small"
+            android:progressTint="#FF4F5A"
             android:stepSize="0.5"
             android:max="5"
             android:isIndicator="true"

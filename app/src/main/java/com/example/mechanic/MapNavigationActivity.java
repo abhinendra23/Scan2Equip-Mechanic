@@ -1,7 +1,4 @@
-package com.example;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mechanic;
 
 import android.annotation.SuppressLint;
 import android.graphics.BitmapFactory;
@@ -12,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.mechanic.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mechanic.model.Manager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -67,7 +66,7 @@ public class MapNavigationActivity extends AppCompatActivity implements OnMapRea
     private PermissionsManager permissionsManager;
     private Location originLocation;
     private NavigationMapRoute navigationMapRoute;
-    private com.mapbox.geojson.Point originPosition;
+    private Point originPosition;
     DirectionsRoute currentRoute;
     private Point destinationPosition;
     private Marker destinationMarker;

@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.MapNavigationActivity;
 import com.example.mechanic.model.Complaint;
 import com.example.mechanic.model.Manager;
 
