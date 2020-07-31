@@ -154,7 +154,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             rating = data.get("rating").toString();
             description = data.get("description").toString();
 
-            Intent intent = new Intent(getApplicationContext(), RequestCompletedFragment.class);
+            Intent intent = new Intent(getApplicationContext(), Requests.class);
             PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
 
             NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
