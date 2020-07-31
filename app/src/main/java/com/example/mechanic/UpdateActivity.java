@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.mechanic.dialogBox.RequestSentDialogBox;
 import com.example.mechanic.model.Complaint;
 import com.example.mechanic.model.Request;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 
 import org.parceler.Parcels;
 
@@ -167,6 +170,44 @@ public class UpdateActivity extends AppCompatActivity {
                 hashMap.put("/RequestId", requestIdValue + 1);
 
                 FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
+
+                //sending notification to manager
+                FirebaseDatabase.getInstance().getReference("tokens").child(managerUid).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String token = (String) dataSnapshot.getValue();
+                        Log.i("ankit token fetch checking",token);
+
+                        HashMap<String,String> data = new HashMap<>();
+                        data.put("description",request.getDescription());
+                        data.put("status",status);
+                        data.put("token",token);
+
+                        FirebaseFunctions firebaseFunctions;
+                        firebaseFunctions = FirebaseFunctions.getInstance();
+                        firebaseFunctions.getHttpsCallable("sendRequest")
+                                .call(data)
+                                .addOnSuccessListener(new OnSuccessListener<HttpsCallableResult>() {
+                                    @Override
+                                    public void onSuccess(HttpsCallableResult httpsCallableResult) {
+                                        HashMap<String,String> hashMap = (HashMap<String, String>) httpsCallableResult.getData();
+                                        if(hashMap.get("status").equals("successful")){
+                                            Log.d("ankit successful","notification successfully sent");
+                                        }
+                                        else{
+                                            Log.d("ankit error occured",hashMap.get("status").toString());
+                                        }
+                                    }
+                                });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
             }
         });
