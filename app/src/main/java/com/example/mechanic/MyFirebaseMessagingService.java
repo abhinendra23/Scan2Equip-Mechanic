@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import com.example.mechanic.adapters.RequestCompletedAdapter;
+import com.example.mechanic.fragments.RequestCompletedFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -72,7 +74,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
             PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
-
             NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
 
             NotificationChannel channel = null;
@@ -93,7 +94,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                             //                        .setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.lmis_logo)).getBitmap())
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setStyle(new NotificationCompat.BigTextStyle()
-                                    .setSummaryText("Mechanic")
+                                    .setSummaryText("Broadcast Message")
                                     .setBigContentTitle(subject)
                                     .bigText(message))
 
@@ -112,7 +113,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             description = data.get("description").toString();
             instruction = data.get("instruction").toString();
 
-            Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+            Intent intent = new Intent(getApplicationContext(), PendingComplaintsActivity.class);
             PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
 
             NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
@@ -135,13 +136,94 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                             //                        .setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.lmis_logo)).getBitmap())
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setStyle(new NotificationCompat.BigTextStyle()
-                                    .setSummaryText("Mechanic")
+                                    .setSummaryText("New Complaint Message")
                                     .setBigContentTitle(serviceType)
                                     .bigText(description))
 
                             //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
                             .setContentText(instruction)
                             .setColor(Color.BLUE)
+                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                            .setContentIntent(pi);
+
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+            nm.notify(101, builder.build());
+        }
+        else if(type.equals("requestApproved")){
+            String rating,description;
+            rating = data.get("rating").toString();
+            description = data.get("description").toString();
+
+            Intent intent = new Intent(getApplicationContext(), Requests.class);
+            PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
+
+            NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+
+            NotificationChannel channel = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                AudioAttributes att = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                        .build();
+
+                channel = new NotificationChannel("222", "my_channel", NotificationManager.IMPORTANCE_HIGH);
+                nm.createNotificationChannel(channel);
+            }
+
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(getApplicationContext(), "222")
+                            .setContentTitle(description)
+                            .setAutoCancel(true)
+                            //.setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.lmis_logo)).getBitmap())
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .setSummaryText("Request Approved")
+                                    .setBigContentTitle(description)
+                                    .bigText("Your rating is "+rating))
+
+                            //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
+                            //.setContentText(description)
+                            //.setColor(Color.BLUE)
+                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                            .setContentIntent(pi);
+
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+            nm.notify(101, builder.build());
+        }
+        else if(type.equals("requestDeclined")){
+            String description;
+            description = data.get("description").toString();
+
+            Intent intent = new Intent(getApplicationContext(), PendingComplaintsActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
+
+            NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+
+            NotificationChannel channel = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                AudioAttributes att = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                        .build();
+
+                channel = new NotificationChannel("222", "my_channel", NotificationManager.IMPORTANCE_HIGH);
+                nm.createNotificationChannel(channel);
+            }
+
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(getApplicationContext(), "222")
+                            .setContentTitle(description)
+                            .setAutoCancel(true)
+                            //.setLargeIcon(((BitmapDrawable)getDrawable(R.drawable.lmis_logo)).getBitmap())
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .setSummaryText("Request Approved")
+                                    //.setBigContentTitle(description)
+                                    .bigText(description))
+
+                            //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.electro))
+                            //.setContentText(description)
+                            //.setColor(Color.BLUE)
                             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                             .setContentIntent(pi);
 

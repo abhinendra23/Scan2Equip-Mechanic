@@ -23,11 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RecentChatFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class RecentChatFragment extends Fragment {
 
     RecyclerView recyclerView;

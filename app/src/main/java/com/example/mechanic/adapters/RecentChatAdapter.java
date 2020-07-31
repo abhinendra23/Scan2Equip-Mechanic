@@ -2,6 +2,7 @@ package com.example.mechanic.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,9 +148,10 @@ public class RecentChatAdapter extends FirebaseRecyclerPagingAdapter<Complaint, 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (getAdapterPosition() == getItemCount() - 1) {
+                            Log.i("sudhanshu","mechanic recent chats");
                             ShimmerFrameLayout shimmerFrameLayout = fragmentView.findViewById(R.id.shimmer_container);
                             RecyclerView recyclerView = fragmentView.findViewById(R.id.recent_chat_rv);
-                            shimmerFrameLayout.stopShimmer();
+                            //shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
 
