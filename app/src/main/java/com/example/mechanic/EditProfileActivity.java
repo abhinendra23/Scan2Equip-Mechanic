@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.mechanic.model.Complaint;
+import com.example.mechanic.model.Manager;
+import com.example.mechanic.model.Request;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +31,7 @@ public class EditProfileActivity extends AppCompatActivity {
     ImageView save,cancel;
     CircleImageView profile;
     EditText name, phone, staff, jobTitle, department, address;
-    DatabaseReference managerReference, complaintReference, requestReference, mechanicReference, machineReference;
+    DatabaseReference mechanicReference, complaintReference, requestReference, managerReference;
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth auth;
     FirebaseUser user;
@@ -60,6 +63,192 @@ public class EditProfileActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final String newName, newPhone, newStaff, newJobTitle, newDepartment, newAddress;
+                newName = name.getText().toString();
+                newPhone = phone.getText().toString();
+                newStaff = staff.getText().toString();
+                newDepartment = department.getText().toString();
+
+                mechanicReference = firebaseDatabase.getReference("Users").child("Mechanic").child(user.getUid());
+                HashMap<String, Object> hashMap = new HashMap<>();
+                if(!newName.isEmpty())
+                    hashMap.put("/Users/Mechanic/" + user.getUid() + "/userName", newName);
+                if(!newPhone.isEmpty())
+                    hashMap.put("/Users/Mechanic/" + user.getUid() + "/phone", newPhone);
+                if(!newStaff.isEmpty())
+                    hashMap.put("/Users/Mechanic/" + user.getUid() + "/empId", newStaff);
+                if(!newDepartment.isEmpty())
+                    hashMap.put("/Users/Mechanic/" + user.getUid() + "/department", newDepartment);
+
+                FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
+
+                complaintReference = firebaseDatabase.getReference("Complaints");
+                complaintReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot complaint : dataSnapshot.getChildren())
+                        {
+                            Complaint complaint1 = complaint.getValue(Complaint.class);
+                            if(complaint1.getMechanic().getUid().equals(user.getUid()))
+                            {
+                                HashMap<String, Object> hashMap = new HashMap<>();
+                                if(!newName.isEmpty())
+                                    hashMap.put("/Complaints/" + complaint1.getComplaintId()+ "/mechanic/userName", newName);
+                                if(!newPhone.isEmpty())
+                                    hashMap.put("/Complaints/" + complaint1.getComplaintId()+ "/mechanic/phone", newPhone);
+                                if(!newStaff.isEmpty())
+                                    hashMap.put("/Complaints/" + complaint1.getComplaintId()+ "/mechanic/empId", newStaff);
+                                if(!newDepartment.isEmpty())
+                                    hashMap.put("/Complaints/" + complaint1.getComplaintId()+ "/mechanic/department", newDepartment);
+
+                                FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                requestReference = firebaseDatabase.getReference("Requests");
+                requestReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot request : dataSnapshot.getChildren())
+                        {
+                            Request request1 = request.getValue(Request.class);
+                            if(request1.getComplaint().getMechanic().getUid().equals(user.getUid()))
+                            {
+                                HashMap<String, Object> hashMap = new HashMap<>();
+                                if(!newName.isEmpty())
+                                    hashMap.put("/Requests/" + request1.getRequestId()+ "/complaint/mechanic/userName", newName);
+                                if(!newPhone.isEmpty())
+                                    hashMap.put("/Requests/" + request1.getRequestId()+ "/complaint/mechanic/phone", newPhone);
+                                if(!newStaff.isEmpty())
+                                    hashMap.put("/Requests/" + request1.getRequestId()+ "/complaint/mechanic/empId", newStaff);
+                                if(!newDepartment.isEmpty())
+                                    hashMap.put("/Requests/" + request1.getRequestId()+ "/complaint/mechanic/department", newDepartment);
+
+                                FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                managerReference = firebaseDatabase.getReference("Users").child("Manager");
+                managerReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot manager : dataSnapshot.getChildren())
+                        {
+                            final Manager manager1 = manager.getValue(Manager.class);
+                            DatabaseReference pendingComplaint = firebaseDatabase.getReference("Users").child("Manager").child(manager1.getUid()).child("pendingComplaints");
+                            pendingComplaint.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for(DataSnapshot complaint : dataSnapshot.getChildren())
+                                    {
+                                        Complaint complaint1 = complaint.getValue(Complaint.class);
+                                        if(complaint1.getMechanic().getUid().equals(user.getUid()))
+                                        {
+                                            HashMap<String, Object> hashMap = new HashMap<>();
+                                            if(!newName.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/pendingComplaints/" + complaint1.getComplaintId()+ "/mechanic/userName", newName);
+                                            if(!newPhone.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/pendingComplaints/" + complaint1.getComplaintId()+ "/mechanic/phone", newPhone);
+                                            if(!newStaff.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/pendingComplaints/" + complaint1.getComplaintId()+ "/mechanic/empId", newStaff);
+                                            if(!newDepartment.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/pendingComplaints/" + complaint1.getComplaintId()+ "/mechanic/department", newDepartment);
+
+                                            FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            DatabaseReference completedComplaint = firebaseDatabase.getReference("Users").child("Manager").child(manager1.getUid()).child("completedComplaints");
+                            completedComplaint.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for(DataSnapshot complaint : dataSnapshot.getChildren())
+                                    {
+                                        Complaint complaint1 = complaint.getValue(Complaint.class);
+                                        if(complaint1.getMechanic().getUid().equals(user.getUid()))
+                                        {
+                                            HashMap<String, Object> hashMap = new HashMap<>();
+                                            if(!newName.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/completedComplaints/" + complaint1.getComplaintId()+ "/mechanic/userName", newName);
+                                            if(!newPhone.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/completedComplaints/" + complaint1.getComplaintId()+ "/mechanic/phone", newPhone);
+                                            if(!newStaff.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/completedComplaints/" + complaint1.getComplaintId()+ "/mechanic/empId", newStaff);
+                                            if(!newDepartment.isEmpty())
+                                                hashMap.put("/Users/Manager/"+ manager1.getUid() +"/completedComplaints/" + complaint1.getComplaintId()+ "/mechanic/department", newDepartment);
+
+                                            FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            DatabaseReference pendingRequest = firebaseDatabase.getReference("Users").child("Manager").child(manager1.getUid()).child("pendingRequests");
+                            pendingRequest.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for(DataSnapshot request : dataSnapshot.getChildren())
+                                    {
+                                        Request request1 = request.getValue(Request.class);
+                                        if(request1.getComplaint().getMechanic().getUid().equals(user.getUid()))
+                                        {
+                                            HashMap<String, Object> hashMap = new HashMap<>();
+                                            if(!newName.isEmpty())
+                                                hashMap.put("/Users/Manager/" + manager1.getUid() + "/pendingRequests/" + request1.getRequestId()+ "/complaint/mechanic/userName", newName);
+                                            if(!newPhone.isEmpty())
+                                                hashMap.put("/Users/Manager/" + manager1.getUid() + "/pendingRequests/" + request1.getRequestId()+ "/complaint/mechanic/phone", newPhone);
+                                            if(!newStaff.isEmpty())
+                                                hashMap.put("/Users/Manager/" + manager1.getUid() + "/pendingRequests/" + request1.getRequestId()+ "/complaint/mechanic/empId", newStaff);
+                                            if(!newDepartment.isEmpty())
+                                                hashMap.put("/Users/Manager/" + manager1.getUid() + "/pendingRequests/" + request1.getRequestId()+ "/complaint/mechanic/department", newDepartment);
+
+                                            FirebaseDatabase.getInstance().getReference().updateChildren(hashMap);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
             }
         });
