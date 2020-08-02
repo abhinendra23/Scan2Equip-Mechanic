@@ -16,6 +16,8 @@ import com.example.mechanic.adapters.RequestCompletedAdapter;
 import com.example.mechanic.fragments.RequestCompletedFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -71,6 +73,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String subject,message;
             subject = data.get("subject").toString();
             message = data.get("message").toString();
+
+            saveInDB(subject,message);
 
             Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
             PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 101, intent, 0);
@@ -230,5 +234,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             builder.setPriority(NotificationCompat.PRIORITY_HIGH);
             nm.notify(101, builder.build());
         }
+    }
+    public void saveInDB(String subject, String message)
+    {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseHelper db = new DatabaseHelper(this, user.getUid());
+        String type="1";
+        Log.i("NCheck ", "Yaha aa gya");
+        boolean isInserted = db.insertData(type, subject, message,user.getUid());
+
+        Log.i("NCheck", "dekh hua kya");
+
     }
 }
