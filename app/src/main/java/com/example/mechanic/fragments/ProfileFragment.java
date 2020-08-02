@@ -80,7 +80,7 @@ public class ProfileFragment extends Fragment {
     UploadTask uploadTask;
     CustomDialogBox dialogBox;
 
-    TextView name,email,phoneNumber;
+    TextView name,email,phoneNumber, empId, department;
 
 
     RecyclerView recyclerView_machine;
@@ -130,35 +130,6 @@ public class ProfileFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity().getApplicationContext(), EditProfileActivity.class);
                 startActivity(intent);
-//                Context context = getActivity().getApplicationContext();
-//                AnimatorSet flipOut = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_out);
-//                AnimatorSet flipIn = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.card_flip_in);
-//                flipIn.addListener(new Animator.AnimatorListener() {
-//                    @Override
-//                    public void onAnimationStart(Animator animation) {
-//                        profileEditLayout.setVisibility(View.VISIBLE);
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        profileLayout.setVisibility(View.GONE);
-//                    }
-//
-//                    @Override
-//                    public void onAnimationCancel(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animator animation) {
-//
-//                    }
-//                });
-//                flipOut.setTarget(profileLayout);
-//                flipIn.setTarget(profileEditLayout);
-//                flipOut.start();
-//                flipIn.start();
-
 
             }
         });
@@ -172,6 +143,8 @@ public class ProfileFragment extends Fragment {
         name = view.findViewById(R.id.sm_profile_name);
         email = view.findViewById(R.id.sm_profile_email);
         phoneNumber = view.findViewById(R.id.sm_profile_phone);
+        empId = view.findViewById(R.id.employee_id);
+        department = view.findViewById(R.id.employee_department);
 //
         databaseReference = FirebaseDatabase.getInstance()
                 .getReference("Users")
@@ -189,6 +162,9 @@ public class ProfileFragment extends Fragment {
 
                 name.setText(mechanic.getUserName());
                 email.setText(mechanic.getEmail());
+                phoneNumber.setText(mechanic.getPhone());
+                empId.setText(mechanic.getEmpId());
+                department.setText(mechanic.getDepartment());
 
                 Float x = mechanic.getOverallRating();
                 double rating = (double)Math.round(x*10d)/10d;
