@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".UpdateActivity">
+    tools:context=".UpdateNew">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     android:fontFamily="@font/imprima"
                     android:layout_marginTop="5dp"
                     android:textColor="#ff646464"
-                    app:layout_constraintTop_toTopOf="@id/Submit_cost"
+                  app:layout_constraintTop_toTopOf="@id/Submit_cost"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
                 </TextView>
 
                 <EditText
-                    android:hint=" Service Charge in Rs "
+                    android:hint="Tell us what you have done"
                     android:id="@+id/Submit_cost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

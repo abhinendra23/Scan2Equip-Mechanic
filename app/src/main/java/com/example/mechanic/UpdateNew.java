@@ -3,7 +3,6 @@ package com.example.mechanic;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.mechanic.dialogBox.RequestSentDialogBox;
 import com.example.mechanic.model.Complaint;
@@ -34,9 +32,7 @@ import org.parceler.Parcels;
 import java.util.Calendar;
 import java.util.HashMap;
 
-
-public class UpdateActivity extends AppCompatActivity {
-
+public class UpdateNew extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference requestIdReference, requestReference, MechanicReference, ManagerReference;
@@ -74,7 +70,7 @@ public class UpdateActivity extends AppCompatActivity {
         requestIdReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    requestIdValue = (long) dataSnapshot.getValue();
+                requestIdValue = (long) dataSnapshot.getValue();
 
             }
 
@@ -102,7 +98,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                RequestSentDialogBox requestSentDialogBox = new RequestSentDialogBox(UpdateActivity.this);
+                RequestSentDialogBox requestSentDialogBox = new RequestSentDialogBox(UpdateNew.this);
                 requestSentDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 requestSentDialogBox.show();
 
@@ -206,7 +202,7 @@ public class UpdateActivity extends AppCompatActivity {
                                         HashMap<String,String> hashMap = (HashMap<String, String>) httpsCallableResult.getData();
                                         if(hashMap.get("status").equals("successful")){
                                             Log.d("ankit successful","notification successfully sent");
-                                            UpdateActivity.this.finish();
+                                            UpdateNew.this.finish();
                                         }
                                         else{
                                             Log.d("ankit error occured",hashMap.get("status").toString());

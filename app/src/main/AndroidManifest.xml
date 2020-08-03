@@ -17,12 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UpdateNew"></activity>
         <activity android:name=".ManagerProfileActivity" />
         <activity android:name=".RequestStepIndicator" />
         <activity android:name=".TestingActivity" />
         <activity android:name=".FaqActivity" />
         <activity android:name=".FeedbackActivity" />
-        <activity android:name=".MapNavigationActivity"/>
+        <activity android:name=".MapNavigationActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".ShowDetailsActivity" />
         <activity android:name=".GetMachineDetailsActivity" />
@@ -31,7 +32,7 @@
         <activity android:name=".ScanQRActivity" />
         <activity android:name=".Requests" />
         <activity android:name=".PendingComplaintsActivity" />
-        <activity android:name=".EditProfileActivity"/>
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".BottomNavigationActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />

@@ -18,9 +18,11 @@ public class RequestSentDialogBox extends Dialog implements View.OnClickListener
     ImageView cancel;
     Button okayButton;
     Button update;
+    Activity a;
 
     public RequestSentDialogBox(Activity a) {
         super(a);
+        this.a = a;
         update = a.findViewById(R.id.submit_update);
         this.setCanceledOnTouchOutside(false);
     }
@@ -38,6 +40,7 @@ public class RequestSentDialogBox extends Dialog implements View.OnClickListener
                 update.setText("Request Updated");
                 update.setEnabled(false);
                 dismiss();
+                a.finish();
             }
         });
 
