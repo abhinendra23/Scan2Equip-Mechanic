@@ -94,6 +94,7 @@ public class UpdateActivity extends AppCompatActivity {
         }
         else
         {
+            submit_update.setText("Submit");
             submit_update.setEnabled(true);
             submit_update.setText("Update");
         }
