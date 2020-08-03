@@ -141,4 +141,7 @@ dependencies {
     //Mapbox Navigation
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.42.6'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.6'
+
+    implementation 'io.kommunicate.sdk:kommunicateui:2.0.4.1'
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
 }

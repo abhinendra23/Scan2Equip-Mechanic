@@ -44,7 +44,7 @@ public class UpdateActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
 
-    EditText Submit_Description;
+    EditText Submit_Description,Submit_cost;
     RadioGroup radio_group;
     RadioButton radioButton;
     String status;
@@ -64,6 +64,7 @@ public class UpdateActivity extends AppCompatActivity {
         Submit_Description = findViewById(R.id.Submit_Description);
         radio_group = findViewById(R.id.radio_group);
         submit_update = findViewById(R.id.submit_update);
+        Submit_cost = findViewById(R.id.Submit_cost);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -115,6 +116,7 @@ public class UpdateActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
 
                 Request request = new Request();
+                request.setCost(Float.valueOf(Submit_cost.getText().toString()));
 
                 request.setDescription(Submit_Description.getText().toString());
 

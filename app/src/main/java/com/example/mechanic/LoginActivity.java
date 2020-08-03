@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
+        TextView ScanBC = findViewById(R.id.scanBC);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -65,6 +67,15 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
             finish();
         }
+
+        ScanBC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, BarCodeLoginActivity.class);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
+                startActivityForResult(i, 32);
+            }
+        });
 
         customDialogBox = new CustomDialogBox(LoginActivity.this);
         customDialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

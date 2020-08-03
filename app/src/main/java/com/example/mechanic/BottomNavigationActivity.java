@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -22,6 +23,7 @@ import com.example.mechanic.fragments.NotificationFragment;
 import com.example.mechanic.fragments.ProfileFragment;
 import com.example.mechanic.fragments.RecentChatFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BottomNavigationActivity extends AppCompatActivity {
 
@@ -32,6 +34,15 @@ public class BottomNavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setOurFragment(new HomeFragment(),1,1);
         setContentView(R.layout.activity_bottom_navigation);
+
+        FloatingActionButton fabChatButton = findViewById(R.id.fabChatButton);
+        fabChatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ChatBotActivity.class);
+                startActivity(i);
+            }
+        });
 
         final Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
